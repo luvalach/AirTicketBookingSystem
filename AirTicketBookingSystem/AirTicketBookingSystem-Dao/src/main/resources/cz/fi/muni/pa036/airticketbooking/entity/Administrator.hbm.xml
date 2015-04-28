@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-Apr-2015 10:09:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cz.fi.muni.pa036.airticketbooking.entity.Administrator" table="administrator" schema="public">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="airline" class="cz.fi.muni.pa036.airticketbooking.entity.Airline" fetch="select">
+            <column name="airline_id" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="30" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-Apr-2015 10:09:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cz.fi.muni.pa036.airticketbooking.entity.Airline" table="airline" schema="public">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <property name="code" type="string">
+            <column name="code" length="5" />
+        </property>
+        <property name="mainAirline" type="java.lang.Character">
+            <column name="main_airline" length="1" />
+        </property>
+        <set name="administrators" inverse="true">
+            <key>
+                <column name="airline_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.Administrator" />
+        </set>
+        <set name="planes" inverse="true">
+            <key>
+                <column name="airline_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.Plane" />
+        </set>
+    </class>
+</hibernate-mapping>

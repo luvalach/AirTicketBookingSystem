@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-Apr-2015 10:09:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cz.fi.muni.pa036.airticketbooking.entity.Flight" table="flight" schema="public">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="plane" class="cz.fi.muni.pa036.airticketbooking.entity.Plane" fetch="select">
+            <column name="plane_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="airportByAirportToId" class="cz.fi.muni.pa036.airticketbooking.entity.Airport" fetch="select">
+            <column name="airport_to_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="airportByAirportFromId" class="cz.fi.muni.pa036.airticketbooking.entity.Airport" fetch="select">
+            <column name="airport_from_id" not-null="true" />
+        </many-to-one>
+        <property name="code" type="string">
+            <column name="code" length="20" />
+        </property>
+        <property name="departure" type="date">
+            <column name="departure" length="13" />
+        </property>
+        <property name="arrival" type="date">
+            <column name="arrival" length="13" />
+        </property>
+        <set name="flightPrices" inverse="true">
+            <key>
+                <column name="flight_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.FlightPrice" />
+        </set>
+        <set name="flightTickets" inverse="true">
+            <key>
+                <column name="flight_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.FlightTicket" />
+        </set>
+    </class>
+</hibernate-mapping>

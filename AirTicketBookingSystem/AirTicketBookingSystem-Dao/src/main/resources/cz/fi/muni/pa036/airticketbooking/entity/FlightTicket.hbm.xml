@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-Apr-2015 10:09:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cz.fi.muni.pa036.airticketbooking.entity.FlightTicket" table="flight_ticket" schema="public">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="flight" class="cz.fi.muni.pa036.airticketbooking.entity.Flight" fetch="select">
+            <column name="flight_id" not-null="true" />
+        </many-to-one>
+        <property name="nextFlightTicket" type="java.lang.Integer">
+            <column name="next_flight_ticket" />
+        </property>
+        <property name="passangerName" type="string">
+            <column name="passanger_name" length="100" />
+        </property>
+        <property name="passangerSurname" type="string">
+            <column name="passanger_surname" length="100" />
+        </property>
+        <property name="passangerMiddleName" type="string">
+            <column name="passanger_middle_name" length="100" />
+        </property>
+        <property name="passangerTitle" type="string">
+            <column name="passanger_title" length="20" />
+        </property>
+        <property name="passangerResidance" type="string">
+            <column name="passanger_residance" length="100" />
+        </property>
+        <property name="passangerIdNumeric" type="string">
+            <column name="passanger_id_numeric" length="30" />
+        </property>
+        <property name="passangerPhoneNumeric" type="string">
+            <column name="passanger_phone_numeric" length="20" />
+        </property>
+        <property name="checkedIn" type="java.lang.Character">
+            <column name="checked_in" length="1" />
+        </property>
+        <set name="flightTicketPrices" inverse="true">
+            <key>
+                <column name="flight_ticket_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.FlightTicketPrice" />
+        </set>
+        <set name="seatReservations" inverse="true">
+            <key>
+                <column name="flight_ticket_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.SeatReservation" />
+        </set>
+        <set name="baggages" inverse="true">
+            <key>
+                <column name="flight_ticket_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.Baggage" />
+        </set>
+    </class>
+</hibernate-mapping>

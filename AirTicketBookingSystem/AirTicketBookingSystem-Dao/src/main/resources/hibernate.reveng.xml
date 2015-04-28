@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="FTRS" match-schema="public"/>
+  <table-filter match-name="plane"/>
+  <table-filter match-name="baggage"/>
+  <table-filter match-name="flight_ticket"/>
+  <table-filter match-name="airport"/>
+  <table-filter match-name="flight_ticket_price"/>
+  <table-filter match-name="airline"/>
+  <table-filter match-name="city"/>
+  <table-filter match-name="flight"/>
+  <table-filter match-name="flight_price"/>
+  <table-filter match-name="seat_reservation"/>
+  <table-filter match-name="administrator"/>
+  <table-filter match-name="seat"/>
+</hibernate-reverse-engineering>

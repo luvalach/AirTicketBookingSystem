@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-Apr-2015 10:09:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cz.fi.muni.pa036.airticketbooking.entity.Seat" table="seat" schema="public">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="plane" class="cz.fi.muni.pa036.airticketbooking.entity.Plane" fetch="select">
+            <column name="plane_id" not-null="true" />
+        </many-to-one>
+        <property name="numeric" type="java.lang.Integer">
+            <column name="NUMERIC" />
+        </property>
+        <property name="nextToWindow" type="java.lang.Character">
+            <column name="next_to_window" length="1" />
+        </property>
+        <property name="inTheMiddle" type="java.lang.Character">
+            <column name="in_the_middle" length="1" />
+        </property>
+        <property name="nextToAisle" type="java.lang.Character">
+            <column name="next_to_aisle" length="1" />
+        </property>
+        <property name="firstClass" type="java.lang.Character">
+            <column name="first_class" length="1" />
+        </property>
+        <property name="secondClass" type="java.lang.Character">
+            <column name="second_class" length="1" />
+        </property>
+        <property name="businessClass" type="java.lang.Character">
+            <column name="business_class" length="1" />
+        </property>
+        <property name="economyClass" type="java.lang.Character">
+            <column name="economy_class" length="1" />
+        </property>
+        <property name="disabledSeating" type="java.lang.Character">
+            <column name="disabled_seating" length="1" />
+        </property>
+        <set name="seatReservations" inverse="true">
+            <key>
+                <column name="seat_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.SeatReservation" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-Apr-2015 10:09:55 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cz.fi.muni.pa036.airticketbooking.entity.Plane" table="plane" schema="public">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="airline" class="cz.fi.muni.pa036.airticketbooking.entity.Airline" fetch="select">
+            <column name="airline_id" not-null="true" />
+        </many-to-one>
+        <property name="code" type="string">
+            <column name="code" length="10" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="100" />
+        </property>
+        <property name="creationDate" type="date">
+            <column name="creation_date" length="13" />
+        </property>
+        <property name="maxSeats" type="java.lang.Integer">
+            <column name="max_seats" />
+        </property>
+        <set name="flights" inverse="true">
+            <key>
+                <column name="plane_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.Flight" />
+        </set>
+        <set name="seats" inverse="true">
+            <key>
+                <column name="plane_id" not-null="true" />
+            </key>
+            <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.Seat" />
+        </set>
+    </class>
+</hibernate-mapping>
