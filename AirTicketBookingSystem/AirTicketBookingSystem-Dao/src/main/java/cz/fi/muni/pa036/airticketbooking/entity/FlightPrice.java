@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class FlightPrice  implements java.io.Serializable {
 
 
-     private int id;
+     private Long id;
      private Flight flight;
      private BigDecimal adult;
      private BigDecimal teen;
@@ -35,11 +35,11 @@ public class FlightPrice  implements java.io.Serializable {
     }
 
 	
-    public FlightPrice(int id, Flight flight) {
+    public FlightPrice(Long id, Flight flight) {
         this.id = id;
         this.flight = flight;
     }
-    public FlightPrice(int id, Flight flight, BigDecimal adult, BigDecimal teen, BigDecimal child, BigDecimal baggageA, BigDecimal baggageB, BigDecimal baggageC, BigDecimal baggageD, BigDecimal baggageE, BigDecimal baggageSport, BigDecimal baggageMusical, BigDecimal firstClass, BigDecimal secondClass, BigDecimal businessClass, BigDecimal economyClass, BigDecimal paymentFee, BigDecimal airportTaxFee, BigDecimal smsFlightInfo, BigDecimal offlineCheckIn) {
+    public FlightPrice(Long id, Flight flight, BigDecimal adult, BigDecimal teen, BigDecimal child, BigDecimal baggageA, BigDecimal baggageB, BigDecimal baggageC, BigDecimal baggageD, BigDecimal baggageE, BigDecimal baggageSport, BigDecimal baggageMusical, BigDecimal firstClass, BigDecimal secondClass, BigDecimal businessClass, BigDecimal economyClass, BigDecimal paymentFee, BigDecimal airportTaxFee, BigDecimal smsFlightInfo, BigDecimal offlineCheckIn) {
        this.id = id;
        this.flight = flight;
        this.adult = adult;
@@ -62,11 +62,11 @@ public class FlightPrice  implements java.io.Serializable {
        this.offlineCheckIn = offlineCheckIn;
     }
    
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public Flight getFlight() {

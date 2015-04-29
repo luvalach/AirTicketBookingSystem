@@ -11,7 +11,7 @@ import java.util.Set;
 public class Airport  implements java.io.Serializable {
 
 
-     private int id;
+     private Long id;
      private City city;
      private String name;
      private String code;
@@ -22,11 +22,11 @@ public class Airport  implements java.io.Serializable {
     }
 
 	
-    public Airport(int id, City city) {
+    public Airport(Long id, City city) {
         this.id = id;
         this.city = city;
     }
-    public Airport(int id, City city, String name, String code, Set flightsForAirportFromId, Set flightsForAirportToId) {
+    public Airport(Long id, City city, String name, String code, Set flightsForAirportFromId, Set flightsForAirportToId) {
        this.id = id;
        this.city = city;
        this.name = name;
@@ -35,11 +35,11 @@ public class Airport  implements java.io.Serializable {
        this.flightsForAirportToId = flightsForAirportToId;
     }
    
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public City getCity() {

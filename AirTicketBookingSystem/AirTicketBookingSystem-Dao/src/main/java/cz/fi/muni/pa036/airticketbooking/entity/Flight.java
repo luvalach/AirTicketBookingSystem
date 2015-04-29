@@ -12,7 +12,7 @@ import java.util.Set;
 public class Flight  implements java.io.Serializable {
 
 
-     private int id;
+     private Long id;
      private Plane plane;
      private Airport airportByAirportToId;
      private Airport airportByAirportFromId;
@@ -26,13 +26,13 @@ public class Flight  implements java.io.Serializable {
     }
 
 	
-    public Flight(int id, Plane plane, Airport airportByAirportToId, Airport airportByAirportFromId) {
+    public Flight(Long id, Plane plane, Airport airportByAirportToId, Airport airportByAirportFromId) {
         this.id = id;
         this.plane = plane;
         this.airportByAirportToId = airportByAirportToId;
         this.airportByAirportFromId = airportByAirportFromId;
     }
-    public Flight(int id, Plane plane, Airport airportByAirportToId, Airport airportByAirportFromId, String code, Date departure, Date arrival, Set flightPrices, Set flightTickets) {
+    public Flight(Long id, Plane plane, Airport airportByAirportToId, Airport airportByAirportFromId, String code, Date departure, Date arrival, Set flightPrices, Set flightTickets) {
        this.id = id;
        this.plane = plane;
        this.airportByAirportToId = airportByAirportToId;
@@ -44,11 +44,11 @@ public class Flight  implements java.io.Serializable {
        this.flightTickets = flightTickets;
     }
    
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public Plane getPlane() {
