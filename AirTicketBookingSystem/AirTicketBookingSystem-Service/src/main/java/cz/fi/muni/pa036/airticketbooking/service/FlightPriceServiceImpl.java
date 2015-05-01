@@ -16,20 +16,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
- * 
+ *
+ *
  * @author Tomas Smetanka
  */
 @Service
 @Transactional
 public class FlightPriceServiceImpl implements FlightPriceService {
 
-   @Autowired
-    private FlightPriceDao flightPriceDao;    
+    @Autowired
+    public FlightPriceDao flightPriceDao;
 
     public void setDAO(FlightPriceDao flightPriceDao) {
         this.flightPriceDao = flightPriceDao;
-    } 
+    }
 
     @Override
     public void create(FlightPriceDto entity) {
@@ -64,5 +64,5 @@ public class FlightPriceServiceImpl implements FlightPriceService {
         tempMap = flightPriceDao.getByListOfFlights(FlightConverter.flightDtoToEntityList(flights));
         return FlightConverter.flightFlightPriceMapToDto(tempMap);
     }
-    
+
 }

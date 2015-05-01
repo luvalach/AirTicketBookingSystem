@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.fi.muni.pa036.airticketbooking.dao;
+package cz.fi.muni.pa036.airticketbooking.dao.impl;
 
+import cz.fi.muni.pa036.airticketbooking.dao.UserRoleDao;
 import cz.fi.muni.pa036.airticketbooking.entity.User;
 import cz.fi.muni.pa036.airticketbooking.entity.UserRole;
 import javax.persistence.EntityManager;

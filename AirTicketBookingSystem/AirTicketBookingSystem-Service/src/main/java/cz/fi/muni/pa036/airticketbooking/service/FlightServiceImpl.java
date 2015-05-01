@@ -2,9 +2,11 @@ package cz.fi.muni.pa036.airticketbooking.service;
 
 import cz.fi.muni.pa036.airticketbooking.api.dto.AirportDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightDto;
+import cz.fi.muni.pa036.airticketbooking.api.dto.PlaneDto;
 import cz.fi.muni.pa036.airticketbooking.api.service.FlightService;
 import cz.fi.muni.pa036.airticketbooking.converter.AirportConverter;
 import cz.fi.muni.pa036.airticketbooking.converter.FlightConverter;
+import cz.fi.muni.pa036.airticketbooking.converter.PlaneConverter;
 import cz.fi.muni.pa036.airticketbooking.dao.FlightDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Flight;
 import java.util.ArrayList;

@@ -27,7 +27,7 @@ public class AirportConverter {
      
     public static AirportDto airportEntityToDto(Airport airport) {
         AirportDto airportDto = new AirportDto();
-        airportDto.setCity(CityConverter.cityEntityTODto(airport.getCity()));
+        airportDto.setCity(CityConverter.cityEntityToDto(airport.getCity()));
         airportDto.setCode(airport.getCode());
         airportDto.setFlightsForAirportFromId(AirportConverter.airportSetToDTO(airport.getFlightsForAirportFromId()));
         airportDto.setFlightsForAirportToId(AirportConverter.airportSetToDTO(airport.getFlightsForAirportToId()));

@@ -1,5 +1,6 @@
-package cz.fi.muni.pa036.airticketbooking.dao;
+package cz.fi.muni.pa036.airticketbooking.dao.impl;
 
+import cz.fi.muni.pa036.airticketbooking.dao.UserDao;
 import cz.fi.muni.pa036.airticketbooking.entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;

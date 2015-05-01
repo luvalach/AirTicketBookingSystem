@@ -14,12 +14,14 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 /**
  * DAO implementation of Flight.
  * 
  * @author Tomas Smetanka
  */
+@Repository
 public class FlightDaoImpl implements FlightDao {
 
     @PersistenceContext(type = PersistenceContextType.EXTENDED)

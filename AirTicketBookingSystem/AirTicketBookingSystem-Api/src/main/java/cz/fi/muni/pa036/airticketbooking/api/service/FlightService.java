@@ -2,6 +2,7 @@ package cz.fi.muni.pa036.airticketbooking.api.service;
 
 import cz.fi.muni.pa036.airticketbooking.api.dto.AirportDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightDto;
+import cz.fi.muni.pa036.airticketbooking.api.dto.PlaneDto;
 import java.util.Date;
 import java.util.List;
 

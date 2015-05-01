@@ -10,12 +10,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 /**
  * DAO implementation of FlightPrice.
  * 
  * @author Tomas Smetanka
  */
+@Repository
 public class FlightPriceDaoImpl implements FlightPriceDao {
 
     private EntityManager em;
