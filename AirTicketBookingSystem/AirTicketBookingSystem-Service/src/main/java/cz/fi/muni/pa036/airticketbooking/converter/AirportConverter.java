@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 
 /**
  * Converts Airport entity to DTO and vice versa.
@@ -13,27 +15,15 @@ import java.util.Set;
  * @author Tomas Smetanka
  */
 public class AirportConverter {
-
-    public static Airport airportDtoToEntity(AirportDto airportDto) {
-        Airport airport = new Airport();
-        airport.setCity(CityConverter.cityDtoToEntity(airportDto.getCity()));
-        airport.setCode(airportDto.getCode());
-        airport.setFlightsForAirportFromId(AirportConverter.airportSetToEntity(airportDto.getFlightsForAirportFromId()));
-        airport.setFlightsForAirportToId(AirportConverter.airportSetToEntity(airportDto.getFlightsForAirportToId()));
-        airport.setId(airportDto.getId());
-        airport.setName(airportDto.getName());
-        return airport;
-    }
      
+    public static Airport airportDtoToEntity(AirportDto airportDto) {
+        Mapper mapper = new DozerBeanMapper();
+        return mapper.map(airportDto, Airport.class);
+    }
+    
     public static AirportDto airportEntityToDto(Airport airport) {
-        AirportDto airportDto = new AirportDto();
-        airportDto.setCity(CityConverter.cityEntityToDto(airport.getCity()));
-        airportDto.setCode(airport.getCode());
-        airportDto.setFlightsForAirportFromId(AirportConverter.airportSetToDTO(airport.getFlightsForAirportFromId()));
-        airportDto.setFlightsForAirportToId(AirportConverter.airportSetToDTO(airport.getFlightsForAirportToId()));
-        airportDto.setId(airport.getId());
-        airportDto.setName(airport.getName());
-        return airportDto;
+        Mapper mapper = new DozerBeanMapper();
+        return mapper.map(airport, AirportDto.class);
     }
     
     public static Set<AirportDto> airportSetToDTO(Set<Airport> airports) {

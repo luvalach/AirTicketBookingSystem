@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 
 /**
  * Converts Flight entity to DTO and vice versa.
@@ -17,31 +19,13 @@ import java.util.Map;
 public class FlightConverter {
 
     public static Flight flightDtoToEntity(FlightDto flightDto) {
-        Flight flight = new Flight();
-        flight.setAirportByAirportFromId(AirportConverter.airportDtoToEntity(flightDto.getAirportByAirportFromId()));
-        flight.setAirportByAirportToId(AirportConverter.airportDtoToEntity(flightDto.getAirportByAirportToId()));
-        flight.setArrival(flightDto.getArrival());
-        flight.setCode(flightDto.getCode());
-        flight.setDeparture(flightDto.getDeparture());
-        flight.setFlightPrices(flightDto.getFlightPrices());
-        flight.setFlightTickets(flightDto.getFlightTickets());
-        flight.setId(flightDto.getId());
-        flight.setPlane(PlaneConverter.planeDtoToEntity(flightDto.getPlane()));
-        return flight;
+        Mapper mapper = new DozerBeanMapper();
+        return mapper.map(flightDto, Flight.class);
     }
      
     public static FlightDto flightEntityToDto(Flight flight) {
-        FlightDto flightDto = new FlightDto();
-        flightDto.setAirportByAirportFromId(AirportConverter.airportEntityToDto(flight.getAirportByAirportFromId()));
-        flightDto.setAirportByAirportToId(AirportConverter.airportEntityToDto(flight.getAirportByAirportToId()));
-        flightDto.setArrival(flight.getArrival());
-        flightDto.setCode(flight.getCode());
-        flightDto.setDeparture(flight.getDeparture());
-        flightDto.setFlightPrices(flight.getFlightPrices());
-        flightDto.setFlightTickets(flight.getFlightTickets());
-        flightDto.setId(flight.getId());
-        flightDto.setPlane(PlaneConverter.planeEntityToDto(flight.getPlane()));
-        return flightDto;
+        Mapper mapper = new DozerBeanMapper();
+        return mapper.map(flight, FlightDto.class);
     }
     
      public static List<FlightDto> flightEntityToDtoList(List<Flight> flightList) {
