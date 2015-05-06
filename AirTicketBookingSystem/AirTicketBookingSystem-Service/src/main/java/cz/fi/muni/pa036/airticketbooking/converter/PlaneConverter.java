@@ -7,6 +7,8 @@ package cz.fi.muni.pa036.airticketbooking.converter;
 
 import cz.fi.muni.pa036.airticketbooking.api.dto.PlaneDto;
 import cz.fi.muni.pa036.airticketbooking.entity.Plane;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,11 +17,31 @@ import cz.fi.muni.pa036.airticketbooking.entity.Plane;
 public class PlaneConverter {
 
     public static Plane planeDtoToEntity(PlaneDto plane) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Plane p = new Plane();
+        p.setId(plane.getId());
+        p.setCode(plane.getCode());
+        p.setCreationDate(plane.getCreationDate());
+        p.setMaxSeats(plane.getMaxSeats());
+        p.setType(plane.getType());
+        return p;
     }
 
     public static PlaneDto planeEntityToDto(Plane plane) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PlaneDto p = new PlaneDto();
+        p.setId(plane.getId());
+        p.setCode(plane.getCode());
+        p.setCreationDate(plane.getCreationDate());
+        p.setMaxSeats(plane.getMaxSeats());
+        p.setType(plane.getType());
+        return p;
+    }
+
+    public static List<PlaneDto> planeEntityToDtoList(List<Plane> planes) {
+        List<PlaneDto> planeDtoList = new ArrayList<>();
+        for (Plane plane : planes) {
+            planeDtoList.add(PlaneConverter.planeEntityToDto(plane));
+        }
+        return planeDtoList;
     }
     
 }

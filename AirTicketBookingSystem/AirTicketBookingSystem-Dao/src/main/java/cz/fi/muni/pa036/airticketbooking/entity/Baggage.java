@@ -9,31 +9,31 @@ package cz.fi.muni.pa036.airticketbooking.entity;
 public class Baggage  implements java.io.Serializable {
 
 
-     private int id;
+     private Long id;
      private FlightTicket flightTicket;
      private String type;
-     private Integer amount;
+     private Long amount;
 
     public Baggage() {
     }
 
 	
-    public Baggage(int id, FlightTicket flightTicket) {
+    public Baggage(Long id, FlightTicket flightTicket) {
         this.id = id;
         this.flightTicket = flightTicket;
     }
-    public Baggage(int id, FlightTicket flightTicket, String type, Integer amount) {
+    public Baggage(Long id, FlightTicket flightTicket, String type, Long amount) {
        this.id = id;
        this.flightTicket = flightTicket;
        this.type = type;
        this.amount = amount;
     }
    
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public FlightTicket getFlightTicket() {
@@ -50,11 +50,11 @@ public class Baggage  implements java.io.Serializable {
     public void setType(String type) {
         this.type = type;
     }
-    public Integer getAmount() {
+    public Long getAmount() {
         return this.amount;
     }
     
-    public void setAmount(Integer amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 

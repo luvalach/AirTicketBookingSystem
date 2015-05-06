@@ -55,7 +55,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public FlightDto getById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return FlightConverter.flightEntityToDto(flightDao.getById(id));
     }
 
     @Override

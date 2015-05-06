@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class PlaneDto implements java.io.Serializable {
 
-    private int id;
+    private Long id;
     private AirlineDto airline;
     private String code;
     private String type;
@@ -23,12 +23,12 @@ public class PlaneDto implements java.io.Serializable {
     public PlaneDto() {
     }
 
-    public PlaneDto(int id, AirlineDto airline) {
+    public PlaneDto(Long id, AirlineDto airline) {
         this.id = id;
         this.airline = airline;
     }
 
-    public PlaneDto(int id, AirlineDto airline, String code, String type, Date creationDate, Integer maxSeats, Set flights, Set seats) {
+    public PlaneDto(Long id, AirlineDto airline, String code, String type, Date creationDate, Integer maxSeats, Set flights, Set seats) {
         this.id = id;
         this.airline = airline;
         this.code = code;
@@ -39,11 +39,11 @@ public class PlaneDto implements java.io.Serializable {
         this.seats = seats;
     }
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -11,7 +11,7 @@ import java.util.Set;
 public class Seat  implements java.io.Serializable {
 
 
-     private int id;
+     private Long id;
      private Plane plane;
      private Integer numeric;
      private Character nextToWindow;
@@ -28,11 +28,11 @@ public class Seat  implements java.io.Serializable {
     }
 
 	
-    public Seat(int id, Plane plane) {
+    public Seat(Long id, Plane plane) {
         this.id = id;
         this.plane = plane;
     }
-    public Seat(int id, Plane plane, Integer numeric, Character nextToWindow, Character inTheMiddle, Character nextToAisle, Character firstClass, Character secondClass, Character businessClass, Character economyClass, Character disabledSeating, Set seatReservations) {
+    public Seat(Long id, Plane plane, Integer numeric, Character nextToWindow, Character inTheMiddle, Character nextToAisle, Character firstClass, Character secondClass, Character businessClass, Character economyClass, Character disabledSeating, Set seatReservations) {
        this.id = id;
        this.plane = plane;
        this.numeric = numeric;
@@ -47,11 +47,11 @@ public class Seat  implements java.io.Serializable {
        this.seatReservations = seatReservations;
     }
    
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public Plane getPlane() {
