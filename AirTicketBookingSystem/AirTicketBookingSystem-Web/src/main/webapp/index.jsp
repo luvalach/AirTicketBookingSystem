@@ -21,9 +21,9 @@
         <!--User JS -->
         <script src="angular/user/userCtrl.js"></script>
         <!--Set angular startup arguments -->
-        <script>
+        <!--<script>
             app.value("userId", "${userId}").value("isAdmin", "<sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>").value("userName", "${userName}");
-        </script>
+        </script>-->
 
         <!-- Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -36,7 +36,7 @@
         <link href="css/business-casual.css" rel="stylesheet">
     </head>
     <body>
-        <div class="brand">Air Tickets Booking System</div>
+        <div class="brand">${airlineName}</div>
         <div class="address-bar">School project</div>
         <!-- Navigation -->
         <nav class="navbar navbar-default" role="navigation">
@@ -49,9 +49,6 @@
                         </li>
                         <li>
                             <a href="/AirTicketBooking/#/user">Users</a>
-                        </li>
-                        <li>
-                            <a href="j_spring_security_logout">Logout (${userName})</a>
                         </li>
                     </ul>
                 </div>

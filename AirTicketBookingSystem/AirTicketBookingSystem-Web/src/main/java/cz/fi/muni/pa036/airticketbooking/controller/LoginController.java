@@ -1,5 +1,6 @@
 package cz.fi.muni.pa036.airticketbooking.controller;
 
+import cz.fi.muni.pa036.airticketbooking.api.service.AirlineService;
 import cz.fi.muni.pa036.airticketbooking.api.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -17,13 +18,15 @@ public class LoginController {
 
     @Autowired
     SecurityService securityService;
+    @Autowired
+    AirlineService airlineService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView adminPage() {
 
-        ModelAndView model = new ModelAndView();
-        model.addObject("userId",this.securityService.getCurrentlyLoggedUser().getId());
-        model.addObject("userName",this.securityService.getCurrentlyLoggedUser().getNick());
+        ModelAndView model = new ModelAndView(); 
+        model.addObject("airlineName", this.airlineService.getMainAirlineDto().getName());
+        //model.addObject("userName",this.securityService.getCurrentlyLoggedUser().getNick());
         model.setViewName("index");
 
         return model;

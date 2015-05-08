@@ -13,7 +13,10 @@ import java.util.List;
  * @author Tommy
  */
 public interface AirlineDao {
+    
     List<Airline> getAll();
-
+    
     Airline getById(Long id);
+    
+    Airline getMainAirline();
 }

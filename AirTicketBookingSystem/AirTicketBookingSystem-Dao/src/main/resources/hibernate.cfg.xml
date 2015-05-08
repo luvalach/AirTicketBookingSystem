@@ -7,6 +7,8 @@
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/FTRS</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">oewmzrny</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
     <mapping resource="cz/fi/muni/pa036/airticketbooking/entity/FlightTicket.hbm.xml"/>
     <mapping resource="cz/fi/muni/pa036/airticketbooking/entity/FlightPrice.hbm.xml"/>
     <mapping resource="cz/fi/muni/pa036/airticketbooking/entity/City.hbm.xml"/>

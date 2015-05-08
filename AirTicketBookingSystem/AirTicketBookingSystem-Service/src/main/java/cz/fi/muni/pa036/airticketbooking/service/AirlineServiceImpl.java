@@ -12,13 +12,18 @@ import cz.fi.muni.pa036.airticketbooking.dao.AirlineDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Airline;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Tommy
  */
+@Service
 public class AirlineServiceImpl implements AirlineService{
-      private AirlineDao adminDao;
+    
+    @Autowired
+    private AirlineDao adminDao;
     
     public void setDAO(AirlineDao adminDao) {
         this.adminDao = adminDao;
@@ -35,6 +40,13 @@ public class AirlineServiceImpl implements AirlineService{
     public AirlineDto getById(Long id) {
         Airline airline = new Airline();
         airline = adminDao.getById(id);
+        return AirlineConverter.airlineEntityToDto(airline);
+    }
+
+    @Override
+    public AirlineDto getMainAirlineDto() {
+        Airline airline = new Airline();
+        airline = adminDao.getMainAirline();
         return AirlineConverter.airlineEntityToDto(airline);
     }
 }

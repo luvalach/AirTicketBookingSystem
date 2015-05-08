@@ -15,11 +15,13 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Tommy
  */
+@Repository
 public class AirlineDaoImpl implements AirlineDao {
      @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager em;
@@ -36,6 +38,19 @@ public class AirlineDaoImpl implements AirlineDao {
 
             Airline objectTemp = (Airline) em.find(Airline.class, id);
             return objectTemp;
+        } catch (PersistenceException | IllegalArgumentException ex) {
+            throw new DataAccessException(ex.getMessage(), ex) {
+            };
+        }
+    }
+    
+    @Override
+    public Airline getMainAirline() {
+        try {
+            Query q = em.createQuery("FROM Airline WHERE main_airline='1'");
+            Airline airlineTemp = (Airline) q.getSingleResult();
+
+            return airlineTemp;
         } catch (PersistenceException | IllegalArgumentException ex) {
             throw new DataAccessException(ex.getMessage(), ex) {
             };
