@@ -14,7 +14,7 @@ public class City  implements java.io.Serializable {
      private Long id;
      private String city;
      private String country;
-     private Set airports = new HashSet(0);
+     private Set<Airport> airports = new HashSet(0) ;
 
     public City() {
     }
@@ -51,17 +51,13 @@ public class City  implements java.io.Serializable {
     public void setCountry(String country) {
         this.country = country;
     }
-    public Set getAirports() {
+    public Set<Airport> getAirports() {
         return this.airports;
     }
     
-    public void setAirports(Set airports) {
+    public void setAirports(Set<Airport> airports) {
         this.airports = airports;
     }
-
-
-
-
 }
 
 

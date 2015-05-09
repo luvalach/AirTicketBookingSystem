@@ -5,6 +5,8 @@ var app = angular.module('airTicketBookingApp', [
     'mainControllers',
     'userControllers',
     'userServices',
+    'cityControllers',
+    'cityServices',
     'ui.bootstrap'
 ]);
 
@@ -30,6 +32,14 @@ app.config(['$routeProvider',
                     templateUrl: 'angular/user/userCreate.html',
                     controller: 'UserCreateCtrl'
                 }). 
+                when('/city', {
+                    templateUrl: 'angular/city/cityList.html',
+                    controller: 'CityListCtrl'
+                }).
+                when('/city/detail/:cityId', {
+                    templateUrl: 'angular/city/cityDetail.html',
+                    controller: 'CityDetailCtrl'
+                }).
                 otherwise({
                     redirectTo: '/homepage'
                 });

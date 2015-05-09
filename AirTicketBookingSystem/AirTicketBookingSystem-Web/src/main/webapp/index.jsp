@@ -21,6 +21,7 @@
         <script src="angular/lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
         <!--User JS -->
         <script src="angular/user/userCtrl.js"></script>
+        <script src="angular/city/cityCtrl.js"></script>
         <!--Set angular startup arguments -->
         <!--<script>
             app.value("userId", "${userId}").value("isAdmin", "<sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>").value("userName", "${userName}");
@@ -53,6 +54,9 @@
                         </li>
                         <li>
                             <a href="/AirTicketBooking/#/check-in">Check-in</a>
+                        </li>
+                        <li>
+                            <a href="/AirTicketBooking/#/city">Cities</a>
                         </li>
                     </ul>
                 </div>
