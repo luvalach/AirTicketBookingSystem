@@ -2,7 +2,7 @@
  * Start Bootstrap - Business Casual Bootstrap Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+*/
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -191,4 +191,29 @@ footer p {
         display: table;
         clear: both;
     }
+}
+
+.contentToRight {
+    float: right;
+}
+
+.inTheMiddle {
+    vertical-align: middle;
+}
+
+.search {
+    width: 70%;
+    margin: 0 auto;
+    border: 0;
+}
+
+.search td {
+    padding: 5px;
+}
+
+.search input[type="submit"] {
+    width: 70%;
+    background-color: cadetblue;
+    color: white;
+    float: right;
 }

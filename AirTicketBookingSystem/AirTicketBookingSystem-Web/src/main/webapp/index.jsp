@@ -8,6 +8,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Air tickets booking system">
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
         <!-- JS -->
         <script src="https://code.angularjs.org/1.3.3/angular.min.js"></script>
         <script src="js/ui-bootstrap-tpls-0.12.0.js"></script>
@@ -15,9 +17,8 @@
         <script src="//code.angularjs.org/1.3.3/angular-resource.js"></script>
         <script src="angular/BookingSystemApp.js"></script>
         <script src="angular/homepage/mainCtrl.js"></script>
+        <script src="js/angular-datepicker.js"></script>
         <script src="angular/lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
-        <!-- jQuery -->
-        <script src="js/jquery.js"></script>
         <!--User JS -->
         <script src="angular/user/userCtrl.js"></script>
         <!--Set angular startup arguments -->
@@ -37,7 +38,7 @@
     </head>
     <body>
         <div class="brand">${airlineName}</div>
-        <div class="address-bar">School project</div>
+        <div class="address-bar">Life is a journey, travel it well.</div>
         <!-- Navigation -->
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
@@ -45,10 +46,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/AirTicketBooking/#/homepage">Home</a>
+                            <a href="/AirTicketBooking/#/homepage">Find a flight</a>
                         </li>
                         <li>
-                            <a href="/AirTicketBooking/#/user">Users</a>
+                            <a href="/AirTicketBooking/#/my-bookings">My Bookings</a>
+                        </li>
+                        <li>
+                            <a href="/AirTicketBooking/#/check-in">Check-in</a>
                         </li>
                     </ul>
                 </div>

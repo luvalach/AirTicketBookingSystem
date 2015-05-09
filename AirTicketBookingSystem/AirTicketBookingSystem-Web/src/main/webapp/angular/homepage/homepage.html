@@ -3,28 +3,115 @@
 
     <div class="row">
         <div class="box">
-            <div class="col-lg-12 text-center">
-
-                <h2 class="brand-before">
-                    <small>Welcome</small>
-                </h2>
-                <h1 class="brand-name">Air ticket booking system</h1>
-                <hr class="tagline-divider">
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="box">
             <div class="col-lg-12">
                 <hr>
                 <h2 class="intro-text text-center">
-                    <strong>Team members</strong>
+                    <strong>FIND YOUR FLIGHT</strong>
                 </h2>
                 <hr>
-                <center>Tomáš Sládek</center>
-                <center>Tomáš Smetánka</center>
-                <center>Lukáš Valach</center>
+                <table class="search">
+                    <tr>
+                        <td colspan="6">
+                            <form action="###???" method='POST'>
+                            <input type="text" id="from" size="80" placeholder="From" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <input type="text" id="to" size="80" placeholder="To" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div ng-controller="Datepicker">
+                                <p class="input-group"> 
+                                    <input type="text" id="departureDate" placeholder="Departure date" class="form-control" datepicker-popup="d.M.yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                            </p>
+                        </td>
+
+                        <td colspan="2">
+                            <div ng-controller="Datepicker">
+                                <p class="input-group"> 
+                                    <input type="text" id="departureReturnDate" placeholder="Return date" class="form-control" datepicker-popup="d.M.yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </td>
+
+                        <td colspan="2">
+                            <div>
+                                <input type="checkbox" id="returnCheckbox">
+                                <label for="returnCheckbox">Return ticket</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">
+                                <select id="adultCount" class="form-control">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                        </td>
+                        <td style="width: 23%;">
+                            <strong>Adults (27+ y.o.)</strong>
+                        </td>
+
+                        <td style="width: 10%;">
+                                <select id="teenCount" class="form-control">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                        </td>
+                        <td style="width: 23%;">
+                            <strong>Teens (12-26 y.o.)</strong>
+                        </td>
+
+                        <td style="width: 10%;">
+                                <select id="childCount" class="form-control">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                        </td>
+                        <td style="width: 24%;">
+                            <strong>Children (0-11 y.o.)</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <select id="childCount" class="form-control">
+                                <option value="economy2nd" selected>Economy 2nd class</option>
+                                <option value="economy1st">Economy 1st class</option>
+                                <option value="business">Business</option>
+                            </select>
+                        </td>
+                        
+                        <td colspan="3">
+                            <input type="submit" value="Search flights" class="form-control">
+                            </form>
+                        </td>
+                    </tr>
+
+                </table>
+
             </div>
         </div>
     </div>
