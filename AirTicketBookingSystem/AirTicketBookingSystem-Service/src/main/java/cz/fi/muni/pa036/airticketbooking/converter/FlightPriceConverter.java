@@ -31,5 +31,13 @@ public class FlightPriceConverter {
         }
         return flightPriceDtoList;
     }
+    
+    public static List<FlightPrice> flightPriceDtoToEntityList(List<FlightPriceDto> flightPriceDtoList) {
+        List<FlightPrice> flightPriceList = new ArrayList<>();
+        for (FlightPriceDto flightPriceDto : flightPriceDtoList) {
+            flightPriceList.add(flightPriceDtoToEntity(flightPriceDto));
+        }
+        return flightPriceList;
+    }
      
 }

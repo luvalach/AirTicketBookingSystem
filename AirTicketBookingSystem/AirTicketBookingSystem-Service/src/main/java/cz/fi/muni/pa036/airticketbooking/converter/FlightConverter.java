@@ -31,7 +31,7 @@ public class FlightConverter {
      public static List<FlightDto> flightEntityToDtoList(List<Flight> flightList) {
         List<FlightDto> flightDtoList = new ArrayList<>();
         for (Flight flight : flightList) {
-            flightDtoList.add(FlightConverter.flightEntityToDto(flight));
+            flightDtoList.add(flightEntityToDto(flight));
         }
         return flightDtoList;
     }
@@ -39,7 +39,7 @@ public class FlightConverter {
      public static List<Flight> flightDtoToEntityList(List<FlightDto> flightDtoList) {
         List<Flight> flightList = new ArrayList<>();
         for (FlightDto flightDto : flightDtoList) {
-            flightList.add(FlightConverter.flightDtoToEntity(flightDto));
+            flightList.add(flightDtoToEntity(flightDto));
         }
         return flightList;
     }
@@ -51,7 +51,7 @@ public class FlightConverter {
         
         HashMap<FlightDto, FlightPriceDto> mapTempDto = new HashMap<>();
         for (Map.Entry<Flight, FlightPrice> entry : mapTemp.entrySet()) {
-            mapTempDto.put(FlightConverter.flightEntityToDto(entry.getKey()), FlightPriceConverter.flightPriceEntityToDto(entry.getValue()));
+            mapTempDto.put(flightEntityToDto(entry.getKey()), FlightPriceConverter.flightPriceEntityToDto(entry.getValue()));
         }
         
         return mapTempDto;

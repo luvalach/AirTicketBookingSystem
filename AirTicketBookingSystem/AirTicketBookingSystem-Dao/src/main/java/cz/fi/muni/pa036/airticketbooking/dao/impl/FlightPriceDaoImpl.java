@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.springframework.dao.DataAccessException;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FlightPriceDaoImpl implements FlightPriceDao {
 
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager em;
 
     public FlightPriceDaoImpl() {

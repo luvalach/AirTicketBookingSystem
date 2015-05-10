@@ -5,8 +5,8 @@ import cz.fi.muni.pa036.airticketbooking.api.service.AirportService;
 import cz.fi.muni.pa036.airticketbooking.converter.AirportConverter;
 import cz.fi.muni.pa036.airticketbooking.dao.AirportDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Airport;
-import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AirportServiceImpl implements AirportService {
 
+    @Autowired
     private AirportDao airportDao;
     
     public void setDAO(AirportDao airportDao) {

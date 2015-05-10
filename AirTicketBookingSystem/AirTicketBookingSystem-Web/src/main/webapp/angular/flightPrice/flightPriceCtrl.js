@@ -77,7 +77,7 @@ flightPriceControllers.controller('FlightPriceDetailCtrl', ['$scope', '$routePar
         };
     }]);
 
-flightPriceControllers.controller('FlightPriceCreateCtrl', ['$scope', '$routeParams', '$window', '$log', 'FlightPriceService', function ($scope, $routeParams, $window, $log, FlightPriceService) {
+flightPriceControllers.controller('FlightPriceCreateCtrl', ['$scope', '$routeParams', '$window', '$log', 'FlightPriceService', 'FlightService', function ($scope, $routeParams, $window, $log, FlightPriceService, FlightService) {
     $scope.errorMessages = {
         "fieldErrors": []
     };
@@ -105,6 +105,10 @@ flightPriceControllers.controller('FlightPriceCreateCtrl', ['$scope', '$routePar
         "offlineCheckIn": ""
     };
 
+    // START flight FK
+    $scope.flights = FlightService("").query();
+    
+
     $scope.goToFlightPriceList = function () {
         $window.location.href = '/AirTicketBooking/#/flightPrice';
     };
@@ -114,14 +118,16 @@ flightPriceControllers.controller('FlightPriceCreateCtrl', ['$scope', '$routePar
         FlightPriceService("").create($scope.flightPrice,
             function (data, status, headers, config) {
                 $log.info("FlightPrice created");
-                //$scope.errorMessages = {};
-                //$scope.showFlightPriceDetail(data);
+                $scope.showFlightPriceDetail(data);
+            //$scope.errorMessages = {};
+            //$scope.showFlightPriceDetail(data);
             },
             function (data, status, headers, config) {
                 $log.error("An error occurred on server! FlightPrice cannot be created.");
                 $scope.errorMessages = data.data;
             });
-    };
+    }; 
+            
 
     $scope.showFlightPriceDetail = function (flightPriceId) {
         $window.location.href = '/AirTicketBooking/#/flightPrice/detail/' + flightPriceId;
@@ -139,6 +145,10 @@ flightPriceServices.factory('FlightPriceService', ['$resource', function ($resou
             getFlightPriceDetail: {
                 method: 'GET', 
                 isArray: false
+            },
+            create: {
+                method: 'POST', 
+                isArray: true
             }
         });
     };

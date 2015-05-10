@@ -126,6 +126,10 @@ flightServices.factory('FlightService', ['$resource', function ($resource) {
             getFlightDetail: {
                 method: 'GET', 
                 isArray: false
+            },
+            create: {
+                method: 'POST', 
+                isArray: true
             }
         });
     };

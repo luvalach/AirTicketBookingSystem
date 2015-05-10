@@ -5,9 +5,13 @@ import cz.fi.muni.pa036.airticketbooking.api.dto.FlightPriceDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightTicketDto;
 import cz.fi.muni.pa036.airticketbooking.api.service.FlightService;
 import cz.fi.muni.pa036.airticketbooking.api.service.SecurityService;
+import cz.fi.muni.pa036.airticketbooking.converter.FlightPriceConverter;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import javax.validation.Valid;
+import org.apache.taglibs.standard.tag.common.core.ForEachSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,7 +88,7 @@ public class FlightRest {
     }
 
     /**
-     * Eliminate infinite recursive Flight->FlightTicket_set/FlightPrice_set and others->Fligth and others, which can't be
+     * Eliminate infinite recursive Flight->FlightTicket_set/FlightPrice_set->Fligth and others, which can't be
      * converted to json
      */
     private FlightDto eliminateInfiniteRecursive(FlightDto flight) {
@@ -92,9 +96,11 @@ public class FlightRest {
             flightTicket.setFlight(null);
         }
         
-        for (FlightPriceDto flightPrice : flight.getFlightPrices()) {
-            flightPrice.setFlight(null);
-        }
+        // TODO: NullPointerException
+        //for (FlightPriceDto flightPrice : flight.getFlightPrices()) {
+        //    flightPrice.setFlight(null);
+        //}
+        flight.setFlightPrices(null);
         
         flight.getAirportByAirportFromId().setFlightsForAirportFromId(null);
         flight.getAirportByAirportFromId().setFlightsForAirportToId(null);

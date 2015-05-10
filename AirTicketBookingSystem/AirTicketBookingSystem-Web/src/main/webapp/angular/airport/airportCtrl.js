@@ -23,7 +23,7 @@ airportControllers.controller('AirportListCtrl', ['$scope', '$window', 'AirportS
     //Call refresh function after app start
     $scope.refreshAirports();
         
-    $scope.showAirportDetail = function (cityId) {
+    $scope.showAirportDetail = function (airportId) {
         $window.location.href = '/AirTicketBooking/#/airport/detail/' + airportId;
     };
 
