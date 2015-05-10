@@ -18,6 +18,7 @@
         <script src="angular/BookingSystemApp.js"></script>
         <script src="angular/homepage/mainCtrl.js"></script>
         <script src="js/angular-datepicker.js"></script>
+        <script src="js/angular-datetimepicker.js"></script>
         <script src="angular/lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
         <!--User JS -->
         <script src="angular/user/userCtrl.js"></script>

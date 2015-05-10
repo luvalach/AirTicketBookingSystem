@@ -13,7 +13,8 @@ var app = angular.module('airTicketBookingApp', [
     'flightServices',
     'flightPriceControllers',
     'flightPriceServices',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.bootstrap.datetimepicker' 
 ]);
 
 app.config(['$routeProvider',

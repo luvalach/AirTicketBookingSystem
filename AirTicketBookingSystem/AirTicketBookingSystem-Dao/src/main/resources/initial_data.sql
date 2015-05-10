@@ -1,3 +1,6 @@
+CREATE SEQUENCE s_flight_price START 101;
+CREATE SEQUENCE s_flight START 101;
+
 -- Airline basic confirguration
 INSERT INTO airline (id, name, code, main_airline) VALUES (1, 'Lufthansa', 'LH', 1);
 

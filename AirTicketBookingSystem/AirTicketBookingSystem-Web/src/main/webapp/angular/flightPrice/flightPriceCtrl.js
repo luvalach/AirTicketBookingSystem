@@ -84,7 +84,7 @@ flightPriceControllers.controller('FlightPriceCreateCtrl', ['$scope', '$routePar
         
     $scope.flightPrice = {
         "id": null,
-        "plane": "",
+        "fligth": null,
         "adult": "",
         "teen": "",
         "child": "",
@@ -105,7 +105,7 @@ flightPriceControllers.controller('FlightPriceCreateCtrl', ['$scope', '$routePar
         "offlineCheckIn": ""
     };
 
-    // START flight FK
+    // flight FK
     $scope.flights = FlightService("").query();
     
 
@@ -115,12 +115,11 @@ flightPriceControllers.controller('FlightPriceCreateCtrl', ['$scope', '$routePar
 
     $scope.createFlightPrice = function () {
         $log.info("Creating flightPrice with code: " + $scope.flightPrice.code);
+        $scope.flightPrice.flight = $scope.flight;
         FlightPriceService("").create($scope.flightPrice,
             function (data, status, headers, config) {
                 $log.info("FlightPrice created");
-                $scope.showFlightPriceDetail(data);
-            //$scope.errorMessages = {};
-            //$scope.showFlightPriceDetail(data);
+                $scope.goToFlightPriceList();
             },
             function (data, status, headers, config) {
                 $log.error("An error occurred on server! FlightPrice cannot be created.");

@@ -77,32 +77,44 @@ flightControllers.controller('FlightDetailCtrl', ['$scope', '$routeParams', '$wi
         };
     }]);
 
-flightControllers.controller('FlightCreateCtrl', ['$scope', '$routeParams', '$window', '$log', 'FlightService', function ($scope, $routeParams, $window, $log, FlightService) {
+flightControllers.controller('FlightCreateCtrl', ['$scope', '$routeParams', '$window', '$log', 'FlightService'/*, 'PlaneService'*/, 'AirportService', function ($scope, $routeParams, $window, $log, FlightService/*, PlaneService*/, AirportService) {
     $scope.errorMessages = {
         "fieldErrors": []
     };
         
     $scope.flight = {
         "id": null,
-        "plane": "",
-        "airportByAirportFromId": "",
-        "airportByAirportToId": "",
+        "plane": null,
+        "airportByAirportFromId": null,
+        "airportByAirportToId": null,
         "code": "",
         "departure": "",
         "arrival": ""
     };
 
+    $scope.flight.departure = new Date();
+    $scope.flight.arrival = new Date();
+    
+    // flight and airport FK
+    /*$scope.planes = PlaneService("").query();*/
+    $scope.airports = AirportService("").query();
+    
+    
     $scope.goToFlightList = function () {
         $window.location.href = '/AirTicketBooking/#/flight';
     };
 
     $scope.createFlight = function () {
         $log.info("Creating flight with code: " + $scope.flight.code);
+        /*$scope.flight.plane = $scope.plane;*/ 
+        $scope.flight.airportByAirportFromId = $scope.airportByAirportFromId;
+        $scope.flight.airportByAirportToId = $scope.airportByAirportToId; 
+
         FlightService("").create($scope.flight,
             function (data, status, headers, config) {
                 $log.info("Flight created");
-                //$scope.errorMessages = {};
-                //$scope.showFlightDetail(data);
+                $scope.validationErrors = {};
+                $scope.goToFlightList();
             },
             function (data, status, headers, config) {
                 $log.error("An error occurred on server! Flight cannot be created.");
@@ -113,6 +125,46 @@ flightControllers.controller('FlightCreateCtrl', ['$scope', '$routeParams', '$wi
     $scope.showFlightDetail = function (flightId) {
         $window.location.href = '/AirTicketBooking/#/flight/detail/' + flightId;
     };
+    
+    // datetime picker
+    $scope.flight = {
+        departure: new Date(),
+        arrival: new Date()
+    };
+    
+    $scope.open = {
+        departure: false,
+        arrival: false
+    };
+  
+    $scope.disabled = function(date, mode) {
+        return (mode === 'day' && (new Date().toDateString() == date.toDateString()));
+    };
+
+    $scope.dateOptions = {
+        showWeeks: false,
+        startingDay: 1
+    };
+  
+    $scope.timeOptions = {
+        readonlyInput: true,
+        showMeridian: false
+    };
+  
+    $scope.openDepartureCalendar = function(e, date) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $scope.open.departure = true;
+    };
+    
+    $scope.openArrivalCalendar = function(e, date) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $scope.open.arrival = true;
+    };
+    
 }]);
 
 var flightServices = angular.module('flightServices', ['ngResource']);

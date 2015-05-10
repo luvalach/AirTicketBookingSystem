@@ -6,7 +6,9 @@
     <class name="cz.fi.muni.pa036.airticketbooking.entity.FlightPrice" table="flight_price" schema="public">
         <id name="id" type="long">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="native">
+                <param name="sequence">s_flight_price</param>
+            </generator>
         </id>
         <many-to-one name="flight" class="cz.fi.muni.pa036.airticketbooking.entity.Flight" fetch="select">
             <column name="flight_id" not-null="true" />

@@ -6,7 +6,9 @@
     <class name="cz.fi.muni.pa036.airticketbooking.entity.Flight" table="flight" schema="public">
         <id name="id" type="long">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="native">
+                <param name="sequence">s_flight</param>
+            </generator>
         </id>
         <many-to-one name="plane" class="cz.fi.muni.pa036.airticketbooking.entity.Plane" fetch="select">
             <column name="plane_id" not-null="true" />
