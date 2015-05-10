@@ -18,6 +18,10 @@ public interface FlightPriceDao {
     
     void delete(FlightPrice entity);
     
+    List<FlightPrice> getAll();
+
+    FlightPrice getById(Long id);
+    
     FlightPrice getByFlight(Flight flight);
     
     HashMap<Flight, FlightPrice> getByListOfFlights(List<Flight> flights);

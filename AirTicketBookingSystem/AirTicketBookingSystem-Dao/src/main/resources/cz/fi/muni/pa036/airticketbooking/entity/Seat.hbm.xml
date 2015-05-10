@@ -4,7 +4,7 @@
 <!-- Generated 28-Apr-2015 10:09:55 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="cz.fi.muni.pa036.airticketbooking.entity.Seat" table="seat" schema="public">
-        <id name="id" type="int">
+        <id name="id" type="long">
             <column name="id" />
             <generator class="assigned" />
         </id>

@@ -7,6 +7,12 @@ var app = angular.module('airTicketBookingApp', [
     'userServices',
     'cityControllers',
     'cityServices',
+    'airportControllers',
+    'airportServices',
+    'flightControllers',
+    'flightServices',
+    'flightPriceControllers',
+    'flightPriceServices',
     'ui.bootstrap'
 ]);
 
@@ -40,6 +46,38 @@ app.config(['$routeProvider',
                     templateUrl: 'angular/city/cityDetail.html',
                     controller: 'CityDetailCtrl'
                 }).
+                when('/airport', {
+                    templateUrl: 'angular/airport/airportList.html',
+                    controller: 'AirportListCtrl'
+                }).
+                when('/airport/detail/:airportId', {
+                    templateUrl: 'angular/airport/airportDetail.html',
+                    controller: 'AirportDetailCtrl'
+                }).
+                when('/flight', {
+                    templateUrl: 'angular/flight/flightList.html',
+                    controller: 'FlightListCtrl'
+                }).
+                when('/flight/detail/:flightId', {
+                    templateUrl: 'angular/flight/flightDetail.html',
+                    controller: 'FlightDetailCtrl'
+                }).
+                when('/flight/create', {
+                    templateUrl: 'angular/flight/flightCreate.html',
+                    controller: 'FlightCreateCtrl'
+                }). 
+                when('/flightPrice', {
+                    templateUrl: 'angular/flightPrice/flightPriceList.html',
+                    controller: 'FlightPriceListCtrl'
+                }).
+                when('/flightPrice/detail/:flightPriceId', {
+                    templateUrl: 'angular/flightPrice/flightPriceDetail.html',
+                    controller: 'FlightPriceDetailCtrl'
+                }).
+                when('/flightPrice/create', {
+                    templateUrl: 'angular/flightPrice/flightPriceCreate.html',
+                    controller: 'FlightPriceCreateCtrl'
+                }). 
                 otherwise({
                     redirectTo: '/homepage'
                 });

@@ -65,4 +65,14 @@ public class FlightPriceServiceImpl implements FlightPriceService {
         return FlightConverter.flightFlightPriceMapToDto(tempMap);
     }
 
+    @Override
+    public List<FlightPriceDto> getAll() {
+        return FlightPriceConverter.flightPriceEntityToDtoList(flightPriceDao.getAll());
+    }
+
+    @Override
+    public FlightPriceDto getById(Long id) {
+        return FlightPriceConverter.flightPriceEntityToDto(flightPriceDao.getById(id));
+    }
+
 }

@@ -15,17 +15,17 @@ public class Airport  implements java.io.Serializable {
      private City city;
      private String name;
      private String code;
-     private Set flightsForAirportFromId = new HashSet(0);
-     private Set flightsForAirportToId = new HashSet(0);
+     private Set<Flight> flightsForAirportFromId = new HashSet(0);
+     private Set<Flight> flightsForAirportToId = new HashSet(0);
 
     public Airport() {
     }
-
 	
     public Airport(Long id, City city) {
         this.id = id;
         this.city = city;
     }
+    
     public Airport(Long id, City city, String name, String code, Set flightsForAirportFromId, Set flightsForAirportToId) {
        this.id = id;
        this.city = city;
@@ -63,23 +63,20 @@ public class Airport  implements java.io.Serializable {
     public void setCode(String code) {
         this.code = code;
     }
-    public Set getFlightsForAirportFromId() {
+    public Set<Flight> getFlightsForAirportFromId() {
         return this.flightsForAirportFromId;
     }
     
     public void setFlightsForAirportFromId(Set flightsForAirportFromId) {
         this.flightsForAirportFromId = flightsForAirportFromId;
     }
-    public Set getFlightsForAirportToId() {
+    public Set<Flight> getFlightsForAirportToId() {
         return this.flightsForAirportToId;
     }
     
     public void setFlightsForAirportToId(Set flightsForAirportToId) {
         this.flightsForAirportToId = flightsForAirportToId;
     }
-
-
-
 
 }
 

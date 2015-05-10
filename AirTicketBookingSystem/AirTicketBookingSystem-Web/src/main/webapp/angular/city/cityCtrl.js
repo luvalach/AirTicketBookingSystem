@@ -79,7 +79,7 @@ cityServices.factory('CityService', ['$resource', function ($resource) {
         return function (city) {
             return $resource('rest/city/' + city + ":param", {}, {
                 query: {method: 'GET', isArray: true},
-                getCityDetail: {method: 'GET', isArray: false},
+                getCityDetail: {method: 'GET', isArray: false}
             });
         };
     }])

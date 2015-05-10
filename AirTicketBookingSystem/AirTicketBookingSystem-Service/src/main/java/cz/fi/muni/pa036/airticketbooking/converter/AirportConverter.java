@@ -33,7 +33,7 @@ public class AirportConverter {
         
         Set<AirportDto> airportsDto = new HashSet<>();
         for (Airport entry : airports) {
-            airportsDto.add(AirportConverter.airportEntityToDto(entry));
+            airportsDto.add(airportEntityToDto(entry));
         }
         return airportsDto;
     }
@@ -45,7 +45,7 @@ public class AirportConverter {
         
         Set<Airport> airports = new HashSet<>();
         for (AirportDto entry : airportsDto) {
-            airports.add(AirportConverter.airportDtoToEntity(entry));
+            airports.add(airportDtoToEntity(entry));
         }
         return airports;
     }
@@ -53,7 +53,7 @@ public class AirportConverter {
      public static List<AirportDto> airportEntityToDtoList(List<Airport> airportList) {
         List<AirportDto> airportDtoList = new ArrayList<>();
         for (Airport airport : airportList) {
-            airportDtoList.add(AirportConverter.airportEntityToDto(airport));
+            airportDtoList.add(airportEntityToDto(airport));
         }
         return airportDtoList;
     }
@@ -61,7 +61,7 @@ public class AirportConverter {
      public static List<Airport> airportDtoToEntityList(List<AirportDto> airportDtoList) {
         List<Airport> airportList = new ArrayList<>();
         for (AirportDto airportDto : airportDtoList) {
-            airportList.add(AirportConverter.airportDtoToEntity(airportDto));
+            airportList.add(airportDtoToEntity(airportDto));
         }
         return airportList;
     }

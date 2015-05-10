@@ -11,6 +11,17 @@ INSERT INTO airport (id, city_id, name, code) VALUES (1, '1', 'Václav Havel Air
 INSERT INTO airport (id, city_id, name, code) VALUES (2, '2', 'Brno Airport', '2');
 INSERT INTO airport (id, city_id, name, code) VALUES (3, '3', 'Vienna International Airport', '3');
 
+-- Planes
+INSERT INTO plane (id, airline_id, code, type, creation_date, max_seats) VALUES (1, 1, '777', 'Boeing 777', '2000-06-16', 283);
+
+-- Flights
+INSERT INTO flight (id, plane_id, airport_from_id, airport_to_id, code, departure, arrival) VALUES (1, 1, 1, 3, 'LHPV55', '2015-06-01 15:30:00', '2015-06-01 16:15:00');
+INSERT INTO flight (id, plane_id, airport_from_id, airport_to_id, code, departure, arrival) VALUES (2, 1, 2, 3, 'LHBV93', '2015-06-02 09:05:00', '2015-06-02 09:25:00');
+INSERT INTO flight (id, plane_id, airport_from_id, airport_to_id, code, departure, arrival) VALUES (3, 1, 3, 1, 'LHVP008', '2015-06-04 10:30:00', '2015-06-04 11:15:00');
+
+-- Flight prices
+INSERT INTO flight_price (id, flight_id, adult, baggage_a, baggage_musical, first_class, second_class, economy_class, payment_fee, airport_tax_fee, sms_flight_info) 
+VALUES (1, 1, 30, 10, 10, 30, 10, 5, 2, 4, 1);
 
 -- Administrators
 INSERT INTO administrator (id, airline_id, name, password) VALUES (1, 1, 'admin', 'password');

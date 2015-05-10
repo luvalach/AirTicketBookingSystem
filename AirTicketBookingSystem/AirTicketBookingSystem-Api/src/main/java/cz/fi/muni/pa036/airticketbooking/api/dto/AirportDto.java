@@ -15,8 +15,8 @@ public class AirportDto {
     private CityDto city;
     private String name;
     private String code;
-    private Set flightsForAirportFromId = new HashSet(0);
-    private Set flightsForAirportToId = new HashSet(0);
+    private Set<FlightDto> flightsForAirportFromId = new HashSet(0);
+    private Set<FlightDto> flightsForAirportToId = new HashSet(0);
 
     public AirportDto() {
     }
@@ -25,6 +25,15 @@ public class AirportDto {
         this.city = city;
         this.name = name;
         this.code = code;
+    }
+
+    public AirportDto(Long id, CityDto city, String name, String code, Set flightsForAirportFromId, Set flightsForAirportToId) {
+        this.id = id;
+        this.city = city;
+        this.name = name;
+        this.code = code;
+        this.flightsForAirportFromId = flightsForAirportFromId;
+        this.flightsForAirportToId = flightsForAirportToId;
     }
 
     public Long getId() {
@@ -59,7 +68,7 @@ public class AirportDto {
         this.code = code;
     }
 
-    public Set getFlightsForAirportFromId() {
+    public Set<FlightDto> getFlightsForAirportFromId() {
         return flightsForAirportFromId;
     }
 
@@ -67,7 +76,7 @@ public class AirportDto {
         this.flightsForAirportFromId = flightsForAirportFromId;
     }
 
-    public Set getFlightsForAirportToId() {
+    public Set<FlightDto> getFlightsForAirportToId() {
         return flightsForAirportToId;
     }
 

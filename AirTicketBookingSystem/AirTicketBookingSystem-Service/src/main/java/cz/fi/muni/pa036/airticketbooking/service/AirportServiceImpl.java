@@ -34,9 +34,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public List<AirportDto> getAll() {
-        List<Airport> airports = new ArrayList<>();
-        airports = airportDao.getAll();
-        return AirportConverter.airportEntityToDtoList(airports);
+        return AirportConverter.airportEntityToDtoList(airportDao.getAll());
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 public class Airline  implements java.io.Serializable {
 
 
-     private int id;
+     private Long id;
      private String name;
      private String code;
      private Character mainAirline;
@@ -22,10 +22,10 @@ public class Airline  implements java.io.Serializable {
     }
 
 	
-    public Airline(int id) {
+    public Airline(Long id) {
         this.id = id;
     }
-    public Airline(int id, String name, String code, Character mainAirline, Set administrators, Set planes) {
+    public Airline(Long id, String name, String code, Character mainAirline, Set administrators, Set planes) {
        this.id = id;
        this.name = name;
        this.code = code;
@@ -34,11 +34,11 @@ public class Airline  implements java.io.Serializable {
        this.planes = planes;
     }
    
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {

@@ -22,6 +22,9 @@
         <!--User JS -->
         <script src="angular/user/userCtrl.js"></script>
         <script src="angular/city/cityCtrl.js"></script>
+        <script src="angular/airport/airportCtrl.js"></script>
+        <script src="angular/flight/flightCtrl.js"></script>
+        <script src="angular/flightPrice/flightPriceCtrl.js"></script>
         <!--Set angular startup arguments -->
         <!--<script>
             app.value("userId", "${userId}").value("isAdmin", "<sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>").value("userName", "${userName}");
@@ -57,6 +60,15 @@
                         </li>
                         <li>
                             <a href="/AirTicketBooking/#/city">Cities</a>
+                        </li>
+                        <li>
+                            <a href="/AirTicketBooking/#/airport">Airports</a>
+                        </li>
+                        <li>
+                            <a href="/AirTicketBooking/#/flight">Flights</a>
+                        </li>
+                        <li>
+                            <a href="/AirTicketBooking/#/flightPrice">Flight Prices</a>
                         </li>
                     </ul>
                 </div>

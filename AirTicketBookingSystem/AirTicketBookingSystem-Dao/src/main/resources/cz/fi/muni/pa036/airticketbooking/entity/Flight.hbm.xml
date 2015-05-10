@@ -4,7 +4,7 @@
 <!-- Generated 28-Apr-2015 10:09:55 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="cz.fi.muni.pa036.airticketbooking.entity.Flight" table="flight" schema="public">
-        <id name="id" type="int">
+        <id name="id" type="long">
             <column name="id" />
             <generator class="assigned" />
         </id>
@@ -20,11 +20,11 @@
         <property name="code" type="string">
             <column name="code" length="20" />
         </property>
-        <property name="departure" type="date">
-            <column name="departure" length="13" />
+        <property name="departure" type="timestamp">
+            <column name="departure" length="32" />
         </property>
-        <property name="arrival" type="date">
-            <column name="arrival" length="13" />
+        <property name="arrival" type="timestamp">
+            <column name="arrival" length="32" />
         </property>
         <set name="flightPrices" inverse="true">
             <key>

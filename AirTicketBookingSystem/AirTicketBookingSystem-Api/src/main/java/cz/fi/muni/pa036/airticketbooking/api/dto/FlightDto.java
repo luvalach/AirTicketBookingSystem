@@ -19,13 +19,14 @@ public class FlightDto {
     private String code;
     private Date departure;
     private Date arrival;
-    private Set flightPrices = new HashSet(0);
-    private Set flightTickets = new HashSet(0);
+    private Set<FlightPriceDto> flightPrices = new HashSet(0);
+    private Set<FlightTicketDto> flightTickets = new HashSet(0);
 
     public FlightDto() {
     }
 
-    public FlightDto(PlaneDto plane, AirportDto airportByAirportToId, AirportDto airportByAirportFromId, String code, Date departure, Date arrival) {
+    public FlightDto(Long id, PlaneDto plane, AirportDto airportByAirportToId, AirportDto airportByAirportFromId, String code, Date departure, Date arrival) {
+        this.id = id;
         this.plane = plane;
         this.airportByAirportToId = airportByAirportToId;
         this.airportByAirportFromId = airportByAirportFromId;
@@ -90,7 +91,7 @@ public class FlightDto {
         this.arrival = arrival;
     }
 
-    public Set getFlightPrices() {
+    public Set<FlightPriceDto> getFlightPrices() {
         return flightPrices;
     }
 
@@ -98,7 +99,7 @@ public class FlightDto {
         this.flightPrices = flightPrices;
     }
 
-    public Set getFlightTickets() {
+    public Set<FlightTicketDto> getFlightTickets() {
         return flightTickets;
     }
 

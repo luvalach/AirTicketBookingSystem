@@ -53,7 +53,7 @@ public class AirportDaoImpl implements AirportDao {
     @Override
     public List<Airport> getAll() {
         try {
-            Query q = em.createQuery("FROM Playlist");
+            Query q = em.createQuery("FROM Airport");
             List<Airport> airports = q.getResultList();
 
             return Collections.unmodifiableList(airports);

@@ -19,8 +19,8 @@ public class Flight  implements java.io.Serializable {
      private String code;
      private Date departure;
      private Date arrival;
-     private Set flightPrices = new HashSet(0);
-     private Set flightTickets = new HashSet(0);
+     private Set<FlightPrice> flightPrices = new HashSet(0);
+     private Set<FlightTicket> flightTickets = new HashSet(0);
 
     public Flight() {
     }
@@ -32,6 +32,7 @@ public class Flight  implements java.io.Serializable {
         this.airportByAirportToId = airportByAirportToId;
         this.airportByAirportFromId = airportByAirportFromId;
     }
+    
     public Flight(Long id, Plane plane, Airport airportByAirportToId, Airport airportByAirportFromId, String code, Date departure, Date arrival, Set flightPrices, Set flightTickets) {
        this.id = id;
        this.plane = plane;
@@ -93,14 +94,14 @@ public class Flight  implements java.io.Serializable {
     public void setArrival(Date arrival) {
         this.arrival = arrival;
     }
-    public Set getFlightPrices() {
+    public Set<FlightPrice> getFlightPrices() {
         return this.flightPrices;
     }
     
     public void setFlightPrices(Set flightPrices) {
         this.flightPrices = flightPrices;
     }
-    public Set getFlightTickets() {
+    public Set<FlightTicket> getFlightTickets() {
         return this.flightTickets;
     }
     

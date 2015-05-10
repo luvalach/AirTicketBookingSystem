@@ -64,6 +64,8 @@ public class CityRest {
     private CityDto eliminateInfiniteRecursive(CityDto city) {
         for (AirportDto airport : city.getAirports()) {
             airport.setCity(null);
+            airport.setFlightsForAirportFromId(null);
+            airport.setFlightsForAirportToId(null);
         }
         return city;
     }

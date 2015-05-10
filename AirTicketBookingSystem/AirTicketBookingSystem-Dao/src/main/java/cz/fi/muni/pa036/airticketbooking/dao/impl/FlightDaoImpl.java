@@ -116,7 +116,7 @@ public class FlightDaoImpl implements FlightDao {
     @Override
     public List<Flight> getAll() {
         try {
-            Query q = em.createQuery("FROM Playlist");
+            Query q = em.createQuery("FROM Flight");
             List<Flight> flights = q.getResultList();
 
             return Collections.unmodifiableList(flights);

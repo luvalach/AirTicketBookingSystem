@@ -4,6 +4,7 @@ import cz.fi.muni.pa036.airticketbooking.dao.FlightPriceDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Flight;
 import cz.fi.muni.pa036.airticketbooking.entity.FlightPrice;
 import cz.fi.muni.pa036.airticketbooking.util.Util;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -139,6 +140,34 @@ public class FlightPriceDaoImpl implements FlightPriceDao {
             
             // TODO: HashMap alebo Map
             return tempHashMap;
+        } catch (PersistenceException | IllegalArgumentException ex) {
+            throw new DataAccessException(ex.getMessage(), ex) {
+            };
+        }
+    }
+
+    @Override
+    public List<FlightPrice> getAll() {
+        try {
+            Query q = em.createQuery("FROM FlightPrice");
+            List<FlightPrice> flightPrices = q.getResultList();
+
+            return Collections.unmodifiableList(flightPrices);
+        } catch (PersistenceException | IllegalArgumentException ex) {
+            throw new DataAccessException(ex.getMessage(), ex) {
+            };
+        }
+    }
+
+    @Override
+    public FlightPrice getById(Long id) {
+        try {
+            if (id == null) {
+                throw new IllegalArgumentException("Id cannot be null.");
+            }
+
+            FlightPrice objectTemp = (FlightPrice) em.find(FlightPrice.class, id);
+            return objectTemp;
         } catch (PersistenceException | IllegalArgumentException ex) {
             throw new DataAccessException(ex.getMessage(), ex) {
             };

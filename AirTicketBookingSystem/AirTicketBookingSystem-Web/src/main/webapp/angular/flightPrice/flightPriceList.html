@@ -1,0 +1,178 @@
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12 text-center">
+                <h1 class="brand-name">Flight Prices</h1>
+                <hr class="tagline-divider">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12">
+                <table align="center" style="width:1000px" class="table table-striped table-bordered table-hover table-condensed">
+                    <thead>
+                        <tr style="background-color: #a68a88; font-weight: bold">
+                            <td ng-click="sortByField('flight.code')">
+                                Flight code
+                                <span  ng-class="getOrderIcon('flight.code')"/>
+                            </td>
+                            <td ng-click="sortByField('adult')">
+                                Adult
+                                <span  ng-class="getOrderIcon('adult')"/>
+                            </td>
+                            <td ng-click="sortByField('teen')">
+                                Teen
+                                <span  ng-class="getOrderIcon('teen')"/>
+                            </td>
+                            <td ng-click="sortByField('child')">
+                                Child
+                                <span  ng-class="getOrderIcon('child')"/>
+                            </td>
+                            <td ng-click="sortByField('baggageA')">
+                                Baggage A
+                                <span  ng-class="getOrderIcon('baggageA')"/>
+                            </td>
+                            <td ng-click="sortByField('baggageA')">
+                                Baggage B
+                                <span  ng-class="getOrderIcon('baggageB')"/>
+                            </td>
+                            <td ng-click="sortByField('baggageB')">
+                                Baggage C
+                                <span  ng-class="getOrderIcon('baggageC')"/>
+                            </td>
+                            <td ng-click="sortByField('baggageC')">
+                                Baggage D
+                                <span  ng-class="getOrderIcon('baggageD')"/>
+                            </td>
+                            <td ng-click="sortByField('baggageD')">
+                                Baggage E
+                                <span  ng-class="getOrderIcon('baggageE')"/>
+                            </td>
+                            <td ng-click="sortByField('baggageMusical')">
+                                Muiscal equipment
+                                <span  ng-class="getOrderIcon('baggageMusical')"/>
+                            </td>
+                            <td ng-click="sortByField('baggageSport')">
+                                Sport equipment
+                                <span  ng-class="getOrderIcon('baggageSport')"/>
+                            </td>
+                            <td ng-click="sortByField('firstClass')">
+                                1st class
+                                <span  ng-class="getOrderIcon('firstClass')"/>
+                            </td>
+                            <td ng-click="sortByField('secondClass')">
+                                2nd class
+                                <span  ng-class="getOrderIcon('secondClass')"/>
+                            </td>
+                            <td ng-click="sortByField('businessClass')">
+                                Business class
+                                <span  ng-class="getOrderIcon('businessClass')"/>
+                            </td>
+                            <td ng-click="sortByField('economyClass')">
+                                Economy class
+                                <span  ng-class="getOrderIcon('economyClass')"/>
+                            </td>
+                            <td ng-click="sortByField('paymentFee')">
+                                Payment fee
+                                <span  ng-class="getOrderIcon('paymentFee')"/>
+                            </td>
+                            <td ng-click="sortByField('airportTaxFee')">
+                                Airport fee
+                                <span  ng-class="getOrderIcon('airportTaxFee')"/>
+                            </td>
+                            <td ng-click="sortByField('smsFlightInfo')">
+                                SMS info
+                                <span  ng-class="getOrderIcon('smsFlightInfo')"/>
+                            </td>
+                            <td ng-click="sortByField('offlineCheckIn')">
+                                Offline check-in
+                                <span  ng-class="getOrderIcon('offlineCheckIn')"/>
+                            </td>
+                            <td>
+                                Show details
+                            </td>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="flightPrice in flightPrices | filter:searchText | orderBy:orderByField:reverseSort">
+                        <td>
+                            {{flightPrice.flight.code}}
+                        </td>
+                        <td>
+                            {{flightPrice.adult || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.teen || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.child || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.baggageA || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.baggageB || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.baggageC || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.baggageD || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.baggageE || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.baggageMusical || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.baggageSport || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.firstClass || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.secondClass || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.businessClass || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.economyClass || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.paymentFee || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.airportTaxFee || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.smsFlightInfo || '0'}}
+                        </td>
+                        <td>
+                            {{flightPrice.offlineCheckIn || '0'}}
+                        </td>
+                        <td>
+                            <a href="" ng-click="showFlightPriceDetail(flightPrice.id)">Detail</a>
+                        </td>
+                    </tr>
+                </table>
+                <div align="center">
+                    <input style="width:1000px" ng-model="searchText" class="form-control" id="exampleInputEmail1" placeholder="Filter flightPrices">
+                </div>
+                <br/>
+                <center>
+                    <button type="button" class="btn btn-info" ng-click="goToCreateFlightPrice()">
+                        Create flight price
+                    </button>
+                    <button type="button" class="btn btn-info" ng-click="refreshFlightPrices()">
+                        Refresh
+                    </button>
+                    <button type="button" class="btn btn-info" ng-click="goToHomePage()">
+                        Back to home page
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
