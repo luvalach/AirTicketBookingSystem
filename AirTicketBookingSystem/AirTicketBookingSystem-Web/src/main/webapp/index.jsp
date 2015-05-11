@@ -26,6 +26,7 @@
         <script src="angular/airport/airportCtrl.js"></script>
         <script src="angular/flight/flightCtrl.js"></script>
         <script src="angular/flightPrice/flightPriceCtrl.js"></script>
+        <script src="angular/ticketReservation/ticketReservation.js"></script>
         <!--Set angular startup arguments -->
         <!--<script>
             app.value("userId", "${userId}").value("isAdmin", "<sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>").value("userName", "${userName}");
@@ -70,6 +71,9 @@
                         </li>
                         <li>
                             <a href="/AirTicketBooking/#/flightPrice">Flight Prices</a>
+                        </li>
+                        <li>
+                            <a href="/AirTicketBooking/#/ticketReservation/1">Ticket Reservation</a>
                         </li>
                     </ul>
                 </div>

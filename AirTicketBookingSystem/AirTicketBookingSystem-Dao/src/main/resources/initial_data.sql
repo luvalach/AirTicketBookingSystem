@@ -1,5 +1,7 @@
 CREATE SEQUENCE s_flight_price START 101;
 CREATE SEQUENCE s_flight START 101;
+CREATE SEQUENCE s_flight_ticket_price START 101;
+CREATE SEQUENCE s_flight_ticket START 101;
 
 -- Airline basic confirguration
 INSERT INTO airline (id, name, code, main_airline) VALUES (1, 'Lufthansa', 'LH', 1);
@@ -23,8 +25,8 @@ INSERT INTO flight (id, plane_id, airport_from_id, airport_to_id, code, departur
 INSERT INTO flight (id, plane_id, airport_from_id, airport_to_id, code, departure, arrival) VALUES (3, 1, 3, 1, 'LHVP008', '2015-06-04 10:30:00', '2015-06-04 11:15:00');
 
 -- Flight prices
-INSERT INTO flight_price (id, flight_id, adult, baggage_a, baggage_musical, first_class, second_class, economy_class, payment_fee, airport_tax_fee, sms_flight_info) 
-VALUES (1, 1, 30, 10, 10, 30, 10, 5, 2, 4, 1);
+INSERT INTO flight_price (id, flight_id, adult, teen, child, baggage_a, baggage_musical, first_class, second_class, economy_class, payment_fee, airport_tax_fee, sms_flight_info) 
+VALUES (1, 1, 30, 25, 20, 10, 10, 30, 10, 5, 2, 4, 1);
 
 -- Administrators
 INSERT INTO administrator (id, airline_id, name, password) VALUES (1, 1, 'admin', 'password');

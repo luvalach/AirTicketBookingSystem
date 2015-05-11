@@ -1,0 +1,196 @@
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12 text-center">
+                <h1 class="brand-name">Ticket reservation</h1>
+                <hr class="tagline-divider">
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-repeat="fieldError in errorMessages.fieldErrors">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{fieldError.field}} - {{fieldError.message}}
+    </div>
+    <div class="row" ng-show="tickets.length > 0">
+        <div class="box">
+            <div class="col-lg-12">Created ticket which waiting for registration confirmation:<br/>
+                <table align="center" style="width:1000px" class="table table-striped table-bordered table-hover table-condensed">
+                    <thead>
+                        <tr style="background-color: #a68a88; font-weight: bold">
+                            <td ng-click="sortByField('code')">
+                                Code
+                                <span  ng-class="getOrderIcon('code')"/>
+                            </td>
+                            <td ng-click="sortByField('from')">
+                                From
+                                <span  ng-class="getOrderIcon('from')"/>
+                            </td>
+                            <td ng-click="sortByField('to')">
+                                To
+                                <span  ng-class="getOrderIcon('to')"/>
+                            </td>
+                            <td ng-click="sortByField('departure')">
+                                Departure
+                                <span  ng-class="getOrderIcon('departure')"/>
+                            </td>
+                            <td ng-click="sortByField('arrival')">
+                                Arrival
+                                <span  ng-class="getOrderIcon('arrival')"/>
+                            </td>
+                            <td>
+                                Edit
+                            </td>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="ticket in tickets | filter:searchText | orderBy:orderByField:reverseSort">
+                        <td>
+                            {{ticket.flight.code}}
+                        </td>
+                        <td>
+                            {{ticket.flight.airportByAirportFromId.name}}
+                        </td>
+                        <td>
+                            {{ticket.flight.airportByAirportToId.name}}
+                        </td>
+                        <td>
+                            {{ticket.flight.departure | date:'medium'}}
+                        </td>
+                        <td>
+                            {{ticket.flight.arrival | date:'medium'}}
+                        </td>
+                        <td>
+                            <a href="" ng-click="editTicket(ticket)">Edit</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12"><br />
+                <form>
+                    <fieldset ng-disabled="isDisabled">
+                        <accordion close-others="true">
+                            <accordion-group is-open="accordianOpen1">
+                                <accordion-heading>
+                                    Passager details <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': accordianOpen1, 'glyphicon-chevron-right': !accordianOpen1}"></i>
+                                </accordion-heading>
+                                <div class="form-group">
+                                    <span>Flight {{flight.code}} from {{ flight.airportByAirportFromId.name}}({{flight.airportByAirportFromId.city.city}}) to {{ flight.airportByAirportToId.name}}({{flight.airportByAirportToId.city.city}})</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formImput2">Passanger name</label>
+                                    <input type="text" class="form-control" id="formImput2" placeholder="" ng-model="ticket.passangerName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formImput3">Passanger surname</label>
+                                    <input type="text" class="form-control" id="formImput3" placeholder="" ng-model="ticket.passangerSurname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formImput4">Passanger middle name</label>
+                                    <input type="text" class="form-control" id="formImput4" placeholder="" ng-model="ticket.passangerMiddleName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formImput5">Passanger title</label>
+                                    <input type="text" class="form-control" id="formImput5" placeholder="" ng-model="ticket.passangerTitle">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formImput6">Passanger residance</label>
+                                    <input type="text" class="form-control" id="formImput6" placeholder="" ng-model="ticket.passangerResidance">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formImput7">Passanger id number</label>
+                                    <input type="text" class="form-control" id="formImput7" placeholder="" ng-model="ticket.passangerIdNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label for="formImput8">Passanger phone number</label>
+                                    <input type="text" class="form-control" id="formImput8" placeholder="" ng-model="ticket.passangerPhoneNumber">
+                                </div>
+
+
+
+
+                                <center>
+                                    <button type="submit" class="btn btn-primary" ng-click="$parent.$parent.accordianOpen2 = !$parent.$parent.accordianOpen2">Next <i class="glyphicon glyphicon-chevron-right"></i></button>
+                                </center>
+                            </accordion-group>
+                            <accordion-group is-open="accordianOpen2">
+                                <accordion-heading>
+                                    Prices <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': accordianOpen2, 'glyphicon-chevron-right': !accordianOpen2}"></i>
+                                </accordion-heading>
+
+
+
+                                <div class="form-group">
+                                    <div>Age:</div>
+                                    <div>
+                                        <input type="radio" id="radioAge1" ng-model="ticket.age" value="adult">
+                                        <label for="radioAge1">Adult</label> ({{ flight.flightPrices[0].adult || '0'}} {{currency}})
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="radioAge2" ng-model="ticket.age" value="teen">
+                                        <label for="radioAge2">Teen</label> ({{ flight.flightPrices[0].teen || '0'}} {{currency}})
+
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="radioAge3" ng-model="ticket.age" value="child">
+                                        <label for="radioAge3">Child</label> ({{ flight.flightPrices[0].child || '0'}} {{currency}})
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>Class:</div>
+                                    <div>
+                                        <input type="radio" id="radioClass1" ng-model="ticket.ticketClass" value="first">
+                                        <label for="radioClass1">First</label> ({{ flight.flightPrices[0].firstClass || '0'}} {{currency}})
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="radioClass2" ng-model="ticket.ticketClass" value="second">
+                                        <label for="radioClass2">Second</label> ({{ flight.flightPrices[0].secondClass || '0'}} {{currency}})
+
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="radioClass3" ng-model="ticket.ticketClass" value="business">
+                                        <label for="radioClass3">Business</label> ({{ flight.flightPrices[0].businessClass || '0'}} {{currency}})
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="radioClass4" ng-model="ticket.ticketClass" value="economy">
+                                        <label for="radioClass4">Economy</label> ({{ flight.flightPrices[0].economyClass || '0'}} {{currency}})
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>Other services:</div>
+                                    <div>
+                                        <input type="checkbox" id="checkboxSmsInfo" ng-model="ticket.smsFlightInfo" ng-true-value="true" ng-false-value="false">
+                                        <label for="checkboxSmsInfo">SMS flight info</label> ({{ flight.flightPrices[0].smsFlightInfo || '0'}} {{currency}})
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="checkboxOfflineCheckIn" ng-model="ticket.offlineCheckIn" ng-true-value="true" ng-false-value="false">
+                                        <label for="checkboxOfflineCheckIn">Offline check in</label> ({{ flight.flightPrices[0].offlineCheckIn || '0'}} {{currency}})
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div>Other prices:</div>
+                                    <div>
+                                        Payment fee: ({{ flight.flightPrices[0].paymentFee || '0'}} {{currency}})
+                                    </div>
+                                    <div>
+                                        Airport tax fee: ({{ flight.flightPrices[0].airportTaxFee || '0'}} {{currency}})
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-default" ng-click="$parent.$parent.accordianOpen1 = !$parent.$parent.accordianOpen1"><i class="glyphicon glyphicon-chevron-left"></i> Previous</button>
+                                <button type="submit" class="btn btn-primary" ng-click="save()">{{saveButtonText}}</button>
+                                <button type="submit" class="btn btn-primary" ng-click="reserveTickets()">Book ticket(s)</button>
+                            </accordion-group>
+                        </accordion>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,8 +5,8 @@
  */
 package cz.fi.muni.pa036.airticketbooking.service;
 
-import cz.fi.muni.pa036.airticketbooking.api.service.CityService;
 import cz.fi.muni.pa036.airticketbooking.api.dto.CityDto;
+import cz.fi.muni.pa036.airticketbooking.api.service.CityService;
 import cz.fi.muni.pa036.airticketbooking.converter.CityConverter;
 import cz.fi.muni.pa036.airticketbooking.dao.CityDao;
 import java.util.List;

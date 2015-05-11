@@ -95,7 +95,7 @@ public class FlightDto {
         return flightPrices;
     }
 
-    public void setFlightPrices(Set flightPrices) {
+    public void setFlightPrices(Set<FlightPriceDto> flightPrices) {
         this.flightPrices = flightPrices;
     }
 
@@ -103,7 +103,7 @@ public class FlightDto {
         return flightTickets;
     }
 
-    public void setFlightTickets(Set flightTickets) {
+    public void setFlightTickets(Set<FlightTicketDto> flightTickets) {
         this.flightTickets = flightTickets;
     }
 
