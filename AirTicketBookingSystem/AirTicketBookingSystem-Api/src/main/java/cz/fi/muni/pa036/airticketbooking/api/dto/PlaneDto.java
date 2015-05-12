@@ -17,8 +17,8 @@ public class PlaneDto implements java.io.Serializable {
     private String type;
     private Date creationDate;
     private Integer maxSeats;
-    private Set flights = new HashSet(0);
-    private Set seats = new HashSet(0);
+    private Set<FlightDto> flights = new HashSet(0);
+    private Set<SeatDto> seats = new HashSet(0);
 
     public PlaneDto() {
     }
@@ -87,7 +87,7 @@ public class PlaneDto implements java.io.Serializable {
         this.maxSeats = maxSeats;
     }
 
-    public Set getFlights() {
+    public Set<FlightDto> getFlights() {
         return this.flights;
     }
 
@@ -95,7 +95,7 @@ public class PlaneDto implements java.io.Serializable {
         this.flights = flights;
     }
 
-    public Set getSeats() {
+    public Set<SeatDto> getSeats() {
         return this.seats;
     }
 

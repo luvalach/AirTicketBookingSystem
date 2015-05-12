@@ -61,7 +61,9 @@ public class PlaneServiceImpl implements PlaneService{
 
     @Override
     public List<PlaneDto> getByAirline(Long airline) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Plane> planes = new ArrayList<>();
+        planes = planeDao.getByAirline(airline);
+        return PlaneConverter.planeEntityToDtoList(planes);
     }
     
 }

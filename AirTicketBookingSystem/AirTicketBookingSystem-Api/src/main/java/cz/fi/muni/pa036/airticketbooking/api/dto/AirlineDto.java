@@ -16,8 +16,8 @@ public class AirlineDto  implements java.io.Serializable {
      private String name;
      private String code;
      private Character mainAirline;
-     private Set administrators = new HashSet(0);
-     private Set planes = new HashSet(0);
+     private Set<AdministratorDto> administrators = new HashSet(0);
+     private Set<PlaneDto> planes = new HashSet(0);
 
     public AirlineDto() {
     }
@@ -70,7 +70,7 @@ public class AirlineDto  implements java.io.Serializable {
     public void setAdministrators(Set administrators) {
         this.administrators = administrators;
     }
-    public Set getPlanes() {
+    public Set<PlaneDto> getPlanes() {
         return this.planes;
     }
     
