@@ -12,13 +12,19 @@ import cz.fi.muni.pa036.airticketbooking.dao.PlaneDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Plane;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Tommy
  */
+@Service
+@Transactional
 public class PlaneServiceImpl implements PlaneService{
     
+    @Autowired
     private PlaneDao planeDao;
     
     public void setDAO(PlaneDao planeDao) {

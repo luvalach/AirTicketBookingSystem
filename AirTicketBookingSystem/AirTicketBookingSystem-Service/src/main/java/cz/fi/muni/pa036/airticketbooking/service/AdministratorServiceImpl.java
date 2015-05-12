@@ -12,13 +12,19 @@ import cz.fi.muni.pa036.airticketbooking.dao.AdministratorDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Administrator;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Tommy
  */
+@Service
+@Transactional
 public class AdministratorServiceImpl implements AdministratorService {
 
+    @Autowired
     private AdministratorDao adminDao;
     
     public void setDAO(AdministratorDao adminDao) {

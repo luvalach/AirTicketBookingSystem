@@ -7,7 +7,6 @@ package cz.fi.muni.pa036.airticketbooking.dao.impl;
 
 import cz.fi.muni.pa036.airticketbooking.dao.AdministratorDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Administrator;
-import cz.fi.muni.pa036.airticketbooking.entity.Airline;
 import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,13 +15,16 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Tommy
  */
+@Repository
 public class AdministratorDaoImpl implements AdministratorDao {
-     @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager em;
 
     public AdministratorDaoImpl() {

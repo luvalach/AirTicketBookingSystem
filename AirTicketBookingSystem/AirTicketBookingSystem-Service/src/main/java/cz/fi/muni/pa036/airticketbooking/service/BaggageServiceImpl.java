@@ -12,12 +12,19 @@ import cz.fi.muni.pa036.airticketbooking.dao.BaggageDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Baggage;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Tommy
  */
+@Service
+@Transactional
 public class BaggageServiceImpl implements BaggageService {
+    
+    @Autowired
     private BaggageDao baggageDao;
     
     public void setDAO(BaggageDao baggageDao) {

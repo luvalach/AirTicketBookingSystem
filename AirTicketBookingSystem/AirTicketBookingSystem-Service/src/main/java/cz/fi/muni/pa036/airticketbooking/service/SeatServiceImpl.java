@@ -12,14 +12,20 @@ import cz.fi.muni.pa036.airticketbooking.dao.SeatDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Seat;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Tommy
  */
+@Service
+@Transactional
 public class SeatServiceImpl implements SeatService{
     private SeatDao seatDao;
     
+    @Autowired
     public void setDAO(SeatDao seatDao) {
         this.seatDao = seatDao;
     }
