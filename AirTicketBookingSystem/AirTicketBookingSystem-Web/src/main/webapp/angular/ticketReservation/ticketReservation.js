@@ -1,11 +1,20 @@
 var ticketReservationControllers = angular.module('ticketReservationControllers', []);
 
-ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$window', 'TicketReservationService', '$log', '$routeParams', '$rootScope', '$location', function ($scope, $window, TicketReservationService, $log, $routeParams, $rootScope, $location) {
+ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$window', 'TicketReservationService', '$log', '$routeParams', '$rootScope', '$location', '$timeout', function ($scope, $window, TicketReservationService, $log, $routeParams, $rootScope, $location, $timeout) {
         $log.info("Ticket reservation CTRL");
 
         $scope.accordianOpen1 = true;
         $scope.accordianOpen2 = false;
 
+        $scope.flightId = $routeParams.flightId;
+        $scope.showTicketForm = true;
+        $scope.ticketsLength = function () {
+            if ($rootScope.tickets != undefined) {
+                return $rootScope.tickets.length;
+            } else {
+                return 0;
+            }
+        }
         $scope.editMode = false;
         $scope.currency = "$";
         $scope.saveButtonText = "Save as new reservation";
@@ -31,23 +40,6 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
         $scope.searchText = '';
         $scope.orderByField = 'departure';
 
-//        $scope.ticket = [
-//            {id: null},
-//            {flight_id: null},
-//            {next_flight_ticket: null},
-//            {passager_name: ''},
-//            {passager_surname: ''},
-//            {passager_middle_name: ''},
-//            {passager_title: ''},
-//            {passager_residance: ''},
-//            {passager_id_number: ''},
-//            {passager_phone_number: ''},
-//            {checked_in: ''},
-//            {flightTicketPrices: null},
-//            {seatReservations: null},
-//            {baggages: null}
-//        ];
-
         $scope.ticket = {
             "id": null,
             "flight": null,
@@ -62,38 +54,99 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
             "checkedIn": null,
             "seatReservations": [],
             "baggages": [],
-            "age": null,
-            "ticketClass": null,
+            "age": "adult",
+            "ticketClass": "second",
             "paymentFee": null,
             "airportTaxFee": null,
-            "smsFlightInfo": null,
-            "offlineCheckIn": null
+            "smsFlightInfo": false,
+            "offlineCheckIn": false
         };
 
-        $scope.addNewTicket = function () {    
-            $scope.ticket.flight = angular.copy($scope.flight);
-            $rootScope.tickets.push(angular.copy($scope.ticket));
+        $scope.setFlightIntoTicket = function () {
+            if (!$scope.editMode) {
+                $scope.ticket.flight = angular.copy($scope.flight);
+            }
         };
 
-        $scope.editTicket = function () {                        
-            $log.info($scope.flight);
+        $scope.addNewTicket = function () {
+            ticketCopy = angular.copy($scope.ticket)
+            $rootScope.tickets.push(ticketCopy);
+            $scope.editTicket(ticketCopy);
+        };
+
+        //Save modified ticket
+        $scope.editTicket = function () {
             $scope.ticket.flight = $scope.flight;
             $rootScope.tickets.push($scope.ticket);
         };
 
+        //Save new of modified ticket
         $scope.save = function () {
-            if ($scope.editMode) {
-                $scope.editTicket();
-            } else {
-                $scope.addNewTicket();
-            }
+            $scope.setFlightIntoTicket();
+            $scope.validateAndSaveTicket();
         };
 
+        //Open saved ticket for editing
         $scope.editTicket = function (ticket) {
             $scope.ticket = ticket;
             $scope.flight = ticket.flight;
             $scope.editMode = true;
+            $scope.showTicketForm = true;
             $scope.saveButtonText = "Save changes";
+        };
+
+        $scope.reserveTickets = function () {
+            TicketReservationService("").create($rootScope.tickets,
+                    function (data, status, headers, config) {
+                        $log.info("Tickets reserved");
+                        $scope.errorMessages = {};
+                        $rootScope.tickets = [];
+                        $scope.tickets = $rootScope.tickets;
+                    },
+                    function (data, status, headers, config) {
+                        $log.error("An error occurred on server! Tickets can't be reserved.");
+                        $scope.errorMessages = data.data;
+                    });
+        };
+
+        $scope.validateAndSaveTicket = function () {
+            $scope.saveButtonText = "Validating and saving ticket..."
+            TicketReservationService("").validateTicket($scope.ticket,
+                    function (data, status, headers, config) {
+                        $log.info("Tickets is valid");
+                        $scope.errorMessages = {};
+
+                        //Edit if exists or add new
+                        if ($scope.editMode) {
+                            //$scope.editTicket();
+                        } else {
+                            $scope.addNewTicket();
+                        }
+
+                        if ($scope.editMode) {
+                            $scope.saveButtonText = "Save changes";
+                        } else {
+                            $scope.saveButtonText = "Save as new reservation";
+                        }
+
+                        $scope.showTicketForm = false;
+                    },
+                    function (data, status, headers, config) {
+                        $log.warn("Tickets is not valid");
+                        $scope.errorMessages = data.data;
+
+                        //Show warning message
+                        $scope.saveButtonText = "Validation error"
+
+                        //Wait for a while and change button text back
+                        $timeout(function () {
+                            if ($scope.editMode) {
+                                $scope.saveButtonText = "Save changes";
+                            } else {
+                                $scope.saveButtonText = "Save as new reservation";
+                            }
+                        }, 500);
+                    });
         };
 
         //Sort table by field(column) or switch asc/desc ordering
@@ -117,20 +170,11 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
                 }
             }
         };
-        
-        $scope.reserveTickets = function () {
-            TicketReservationService("").create($rootScope.tickets,
-                    function (data, status, headers, config) {
-                        $log.info("Tickets reserved");
-                        $scope.errorMessages = {};
-                        $rootScope.tickets = [];
-                        $scope.tickets = $rootScope.tickets;
-                    },
-                    function (data, status, headers, config) {
-                        $log.error("An error occurred on server! Tickets can't be reserved.");
-                        $scope.errorMessages = data.data;
-                    });
+
+        $scope.goToSearch = function () {
+            $window.location.href = '/AirTicketBooking/#/ticketReservation';
         };
+
     }]);
 
 var ticketReservationServices = angular.module('ticketReservationServices', ['ngResource']);
@@ -141,7 +185,8 @@ ticketReservationServices.factory('TicketReservationService', ['$resource', func
                 getFlightDetail: {method: 'GET', isArray: false},
                 create: {method: 'POST', isArray: true},
                 update: {method: 'PUT', isArray: false},
-                delete: {method: 'DELETE', isArray: false}
+                delete: {method: 'DELETE', isArray: false},
+                validateTicket: {method: 'POST', isArray: false, url: "rest/ticketReservation/validateTicket"}
             });
         };
     }]);

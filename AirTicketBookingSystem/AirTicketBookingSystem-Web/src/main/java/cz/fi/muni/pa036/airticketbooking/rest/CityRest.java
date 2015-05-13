@@ -11,8 +11,10 @@ import cz.fi.muni.pa036.airticketbooking.api.service.CityService;
 import cz.fi.muni.pa036.airticketbooking.api.service.SecurityService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,5 +70,27 @@ public class CityRest {
             airport.setFlightsForAirportToId(null);
         }
         return city;
+    }
+    
+    /**
+     * Only for test purpose
+     * @param city
+     * @return 
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public List<Long> createLocation(@RequestBody @Valid CityDto city) {
+        List<Long> resultList = new ArrayList<>();    
+        return resultList;
+    }
+    
+        /**
+     * Only for test purpose
+     * @param city
+     * @return 
+     */
+    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    public List<Long> createLocation(@RequestBody @Valid List<CityDto> city) {
+        List<Long> resultList = new ArrayList<>();    
+        return resultList;
     }
 }

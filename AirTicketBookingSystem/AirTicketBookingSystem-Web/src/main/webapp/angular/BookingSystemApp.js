@@ -18,7 +18,7 @@ var app = angular.module('airTicketBookingApp', [
     'ticketReservationControllers',
     'ticketReservationServices',
     'ui.bootstrap',
-    'ui.bootstrap.datetimepicker' 
+    'ui.bootstrap.datetimepicker'
 ]);
 
 app.config(['$routeProvider',
@@ -35,10 +35,10 @@ app.config(['$routeProvider',
                     templateUrl: 'angular/homepage/searchResults.html',
                     controller: 'SearchCtrl'
                 })./*
-                when('/searchResults', {
-                    templateUrl: 'angular/homepage/searchResults.html',
-                    controller: 'SearchCtrl'
-                }).*/
+                 when('/searchResults', {
+                 templateUrl: 'angular/homepage/searchResults.html',
+                 controller: 'SearchCtrl'
+                 }).*/
                 when('/user', {
                     templateUrl: 'angular/user/userList.html',
                     controller: 'UserListCtrl'
@@ -50,7 +50,7 @@ app.config(['$routeProvider',
                 when('/user/create', {
                     templateUrl: 'angular/user/userCreate.html',
                     controller: 'UserCreateCtrl'
-                }). 
+                }).
                 when('/city', {
                     templateUrl: 'angular/city/cityList.html',
                     controller: 'CityListCtrl'
@@ -78,7 +78,7 @@ app.config(['$routeProvider',
                 when('/flight/create', {
                     templateUrl: 'angular/flight/flightCreate.html',
                     controller: 'FlightCreateCtrl'
-                }). 
+                }).
                 when('/flightPrice', {
                     templateUrl: 'angular/flightPrice/flightPriceList.html',
                     controller: 'FlightPriceListCtrl'
@@ -90,11 +90,15 @@ app.config(['$routeProvider',
                 when('/flightPrice/create', {
                     templateUrl: 'angular/flightPrice/flightPriceCreate.html',
                     controller: 'FlightPriceCreateCtrl'
-                }). 
+                }).
+                when('/ticketReservation/', {
+                    templateUrl: 'angular/ticketReservation/ticketReservation.html',
+                    controller: 'TicketReservationCtrl'
+                }).
                 when('/ticketReservation/:flightId', {
                     templateUrl: 'angular/ticketReservation/ticketReservation.html',
                     controller: 'TicketReservationCtrl'
-                }).         
+                }).
                 otherwise({
                     redirectTo: '/homepage'
                 });

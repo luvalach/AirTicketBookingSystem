@@ -5,6 +5,9 @@ package cz.fi.muni.pa036.airticketbooking.api.dto;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -14,9 +17,12 @@ public class FlightTicketWithPriceDto  implements java.io.Serializable {
 
 
      private Long id;
+     @NotNull
      private FlightDto flight;
      private Long nextFlightTicketId;
-     private String passanger;
+     @NotBlank
+     private String passangerName;
+     @NotBlank
      private String passangerSurname;
      private String passangerMiddleName;
      private String passangerTitle;
@@ -27,12 +33,14 @@ public class FlightTicketWithPriceDto  implements java.io.Serializable {
      private Set<SeatReservationDto> seatReservations = new HashSet(0);
      private Set<BaggageDto> baggages = new HashSet(0);
     
-     private String age;
-     private String ticketClass;
+     @Pattern(message = "Passenger's age has to be set (adult, teen or child)", regexp = "(adult|teen|child)")
+     private String age = "adult";
+     @Pattern(message = "Ticket class has to be set (first, second, business or economy class)", regexp = "(first|second|business|economy)")
+     private String ticketClass = "second";
      private BigDecimal paymentFee;
      private BigDecimal airportTaxFee;
-     private Boolean smsFlightInfo;
-     private Boolean offlineCheckIn;
+     private Boolean smsFlightInfo = false;
+     private Boolean offlineCheckIn  = false;
 
     public FlightTicketWithPriceDto() {
     }
@@ -52,19 +60,19 @@ public class FlightTicketWithPriceDto  implements java.io.Serializable {
     public void setNextFlightTicketId(Long nextFlightTicketId) {
         this.nextFlightTicketId = nextFlightTicketId;
     }
-
+    
     public String getPassangerName() {
-        return passanger;
+        return passangerName;
     }
-
+    
     public void setPassangerName(String passanger) {
-        this.passanger = passanger;
+        this.passangerName = passanger;
     }
 
     public String getPassangerSurname() {
         return passangerSurname;
     }
-
+    
     public void setPassangerSurname(String passangerSurname) {
         this.passangerSurname = passangerSurname;
     }
@@ -136,7 +144,7 @@ public class FlightTicketWithPriceDto  implements java.io.Serializable {
     public String getAge() {
         return age;
     }
-
+    
     public void setAge(String age) {
         this.age = age;
     }
@@ -144,7 +152,7 @@ public class FlightTicketWithPriceDto  implements java.io.Serializable {
     public String getTicketClass() {
         return ticketClass;
     }
-
+    
     public void setTicketClass(String ticketClass) {
         this.ticketClass = ticketClass;
     }

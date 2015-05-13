@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 
- * 
+ *
+ *
  * @author Lukáš Valach
  */
 @RestController
@@ -28,10 +28,10 @@ public class TicketReservationRest {
 
     @Autowired
     FlightService flightService;
-    
+
     @Autowired
     SecurityService securityService;
-    
+
     @Autowired
     TicketReservationService reservationService;
 
@@ -40,35 +40,38 @@ public class TicketReservationRest {
         FlightDto flight = flightService.getById(flightId);
         return this.eliminateInfiniteRecursiveFromDepthObjects(flight);
     }
-    
+
     //Only for test
     @RequestMapping(value = "/empty", method = RequestMethod.GET)
     public FlightTicketWithPriceDto getEmptyReservationDto() {
         return new FlightTicketWithPriceDto();
     }
-    
+
     @RequestMapping(method = RequestMethod.POST)
     public List<Long> createReservation(@RequestBody @Valid List<FlightTicketWithPriceDto> flightTicketWithPriceDtoList) {
         List<Long> resultList = reservationService.splitAndSaveFlightTicketList(flightTicketWithPriceDtoList);
         return resultList;
     }
-    
+
+    @RequestMapping(value = "/validateTicket", method = RequestMethod.POST)
+    public void validateTicket(@RequestBody @Valid FlightTicketWithPriceDto flightTicketWithPriceDtoList) {
+    }
 
     private FlightDto eliminateInfiniteRecursiveFromDepthObjects(FlightDto flight) {
         for (FlightTicketDto flightTicket : flight.getFlightTickets()) {
-           flightTicket.setFlight(null);
+            flightTicket.setFlight(null);
         }
 
         Iterator<FlightTicketDto> flightTicketsIterator = flight.getFlightTickets().iterator();
-        while(flightTicketsIterator.hasNext()){
+        while (flightTicketsIterator.hasNext()) {
             flightTicketsIterator.next().setFlightTicketPrices(null);
         }
-        
+
         Iterator<FlightPriceDto> flightPricesIterator = flight.getFlightPrices().iterator();
-        while(flightPricesIterator.hasNext()){
+        while (flightPricesIterator.hasNext()) {
             flightPricesIterator.next().setFlight(null);
         }
-        
+
         flight.getAirportByAirportFromId().setFlightsForAirportFromId(null);
         flight.getAirportByAirportFromId().setFlightsForAirportToId(null);
         flight.getAirportByAirportFromId().getCity().setAirports(null);
@@ -77,7 +80,7 @@ public class TicketReservationRest {
         flight.getAirportByAirportToId().getCity().setAirports(null);
         flight.getPlane().setFlights(null);
         flight.getPlane().setSeats(null);
-        
+
         return flight;
     }
 }

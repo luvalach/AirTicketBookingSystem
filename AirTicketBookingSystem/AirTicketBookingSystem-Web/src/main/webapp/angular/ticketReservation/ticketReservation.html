@@ -43,7 +43,7 @@
                             </td>
                         </tr>
                     </thead>
-                    <tr ng-repeat="ticket in tickets | filter:searchText | orderBy:orderByField:reverseSort">
+                    <tr ng-repeat="ticket in tickets| filter:searchText | orderBy:orderByField:reverseSort">
                         <td>
                             {{ticket.flight.code}}
                         </td>
@@ -54,10 +54,10 @@
                             {{ticket.flight.airportByAirportToId.name}}
                         </td>
                         <td>
-                            {{ticket.flight.departure | date:'medium'}}
+                            {{ticket.flight.departure| date:'medium'}}
                         </td>
                         <td>
-                            {{ticket.flight.arrival | date:'medium'}}
+                            {{ticket.flight.arrival| date:'medium'}}
                         </td>
                         <td>
                             <a href="" ng-click="editTicket(ticket)">Edit</a>
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-show="showTicketForm && (flightId != undefined)">
         <div class="box">
             <div class="col-lg-12"><br />
                 <form>
@@ -185,11 +185,18 @@
 
                                 <button type="submit" class="btn btn-default" ng-click="$parent.$parent.accordianOpen1 = !$parent.$parent.accordianOpen1"><i class="glyphicon glyphicon-chevron-left"></i> Previous</button>
                                 <button type="submit" class="btn btn-primary" ng-click="save()">{{saveButtonText}}</button>
-                                <button type="submit" class="btn btn-primary" ng-click="reserveTickets()">Book ticket(s)</button>
                             </accordion-group>
                         </accordion>
                     </fieldset>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-hide="showTicketForm">
+        <div class="box">
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-primary" ng-show="flightId == undefined" ng-click="goToSearch">Search flight</button>
+                <button type="submit" class="btn btn-primary" ng-show="ticketsLength() > 0" ng-click="reserveTickets()">Book ticket(s)</button>
             </div>
         </div>
     </div>

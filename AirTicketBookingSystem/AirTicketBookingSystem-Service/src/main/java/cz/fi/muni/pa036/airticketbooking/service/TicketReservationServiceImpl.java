@@ -139,7 +139,6 @@ public class TicketReservationServiceImpl implements TicketReservationService {
         flightTicketPrice.setPaymentFee(flightPrices.getPaymentFee() == null ? new BigDecimal(0) : flightPrices.getPaymentFee());
         flightTicketPrice.setFlightTicket(flightTicket);
         flightTicketDao.create(FlightTicketConverter.flightTicketDtoToEntity(flightTicket));
-        //flightTicketPriceDao.create(FlightTicketPriceConverter.flightTicketPriceDtoToEntity(flightTicketPrice));
                 
         return flightTicket.getId();
     }
