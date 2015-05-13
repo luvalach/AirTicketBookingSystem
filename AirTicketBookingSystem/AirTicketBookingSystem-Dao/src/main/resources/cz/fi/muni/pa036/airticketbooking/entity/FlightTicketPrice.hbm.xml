@@ -10,7 +10,7 @@
                 <param name="sequence">s_flight_ticket_price</param>
             </generator>
         </id>
-        <many-to-one name="flightTicket" class="cz.fi.muni.pa036.airticketbooking.entity.FlightTicket" fetch="select">
+        <many-to-one name="flightTicket" class="cz.fi.muni.pa036.airticketbooking.entity.FlightTicket" fetch="select" cascade="all">
             <column name="flight_ticket_id" not-null="true" />
         </many-to-one>
         <property name="adult" type="big_decimal">

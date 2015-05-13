@@ -25,7 +25,7 @@ public class FlightDto {
     public FlightDto() {
     }
 
-    public FlightDto(Long id, PlaneDto plane, AirportDto airportByAirportToId, AirportDto airportByAirportFromId, String code, Date departure, Date arrival) {
+    public FlightDto(Long id, PlaneDto plane, AirportDto airportByAirportToId, AirportDto airportByAirportFromId, String code, Date departure, Date arrival, Set<FlightPriceDto> flightPrices, Set<FlightTicketDto> flightTickets) {
         this.id = id;
         this.plane = plane;
         this.airportByAirportToId = airportByAirportToId;
@@ -33,6 +33,8 @@ public class FlightDto {
         this.code = code;
         this.departure = departure;
         this.arrival = arrival;
+        this.flightPrices = flightPrices;
+        this.flightTickets = flightTickets;
     }
 
     public Long getId() {

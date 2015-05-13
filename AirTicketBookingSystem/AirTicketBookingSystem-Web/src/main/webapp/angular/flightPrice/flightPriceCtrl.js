@@ -75,6 +75,19 @@ flightPriceControllers.controller('FlightPriceDetailCtrl', ['$scope', '$routePar
         $scope.goToFlightPriceList = function () {
             $window.location.href = '/AirTicketBooking/#/flightPrice';
         };
+        
+        $scope.deleteFlightPrice = function (flightPrice) {
+            $log.info("Deleting flightPrice with ID: " + flightPrice.id);
+            FlightPriceService(flightPrice.id).remove(
+            function (data, status, headers, config) {
+                $log.info("FlightPrice deleted");
+                $scope.goToFlightPriceList();
+            },
+            function (data, status, headers, config) {
+                $log.error("An error occurred on server! FlightPrice cannot be deleted.");
+            });
+        };
+        
     }]);
 
 flightPriceControllers.controller('FlightPriceCreateCtrl', ['$scope', '$routeParams', '$window', '$log', 'FlightPriceService', 'FlightService', function ($scope, $routeParams, $window, $log, FlightPriceService, FlightService) {
@@ -148,6 +161,10 @@ flightPriceServices.factory('FlightPriceService', ['$resource', function ($resou
             create: {
                 method: 'POST', 
                 isArray: true
+            },            
+            remove: {
+                method: 'DELETE', 
+                isArray: false
             }
         });
     };

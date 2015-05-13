@@ -3,6 +3,8 @@ var app = angular.module('airTicketBookingApp', [
     'ngRoute',
     'xeditable',
     'mainControllers',
+    'searchControllers',
+    'searchServices',
     'userControllers',
     'userServices',
     'cityControllers',
@@ -29,6 +31,14 @@ app.config(['$routeProvider',
                     templateUrl: 'angular/homepage/homepage.html',
                     controller: 'MainCtrl'
                 }).
+                when('/searchResults/:from/:to/:departure', {
+                    templateUrl: 'angular/homepage/searchResults.html',
+                    controller: 'SearchCtrl'
+                })./*
+                when('/searchResults', {
+                    templateUrl: 'angular/homepage/searchResults.html',
+                    controller: 'SearchCtrl'
+                }).*/
                 when('/user', {
                     templateUrl: 'angular/user/userList.html',
                     controller: 'UserListCtrl'

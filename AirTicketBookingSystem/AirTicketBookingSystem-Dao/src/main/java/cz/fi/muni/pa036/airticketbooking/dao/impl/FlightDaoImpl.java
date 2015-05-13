@@ -5,6 +5,7 @@ import cz.fi.muni.pa036.airticketbooking.entity.Airport;
 import cz.fi.muni.pa036.airticketbooking.entity.Flight;
 import cz.fi.muni.pa036.airticketbooking.entity.Plane;
 import cz.fi.muni.pa036.airticketbooking.util.Util;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -139,7 +140,7 @@ public class FlightDaoImpl implements FlightDao {
                 throw new IllegalArgumentException("Arrival airport cannot be null.");
             }
 
-            Query q = em.createQuery("FROM Flight WHERE airportFrom=:from AND airportTo=:to");
+            Query q = em.createQuery("FROM Flight WHERE airport_from_id=:from AND airport_to_id=:to");
             q.setParameter("from", from);
             q.setParameter("to", to);
             List<Flight> flights = q.getResultList();
@@ -166,10 +167,16 @@ public class FlightDaoImpl implements FlightDao {
                 throw new IllegalArgumentException("Departure date cannot be null.");
             }
 
-            Query q = em.createQuery("FROM Flight WHERE airportFrom=:from AND airportTo=:to AND departure=:departure");
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(departure);
+            cal.add(Calendar.DATE, 7); 
+            Date departurePlusOneWeek = cal.getTime();
+            
+            Query q = em.createQuery("FROM Flight WHERE airport_from_id=:from AND airport_to_id=:to AND departure>=:departure AND departure<=:departure_plus_week");
             q.setParameter("from", from);
             q.setParameter("to", to);
             q.setParameter("departure", departure);
+            q.setParameter("departure_plus_week", departurePlusOneWeek);
             List<Flight> flights = q.getResultList();
 
             return Collections.unmodifiableList(flights);

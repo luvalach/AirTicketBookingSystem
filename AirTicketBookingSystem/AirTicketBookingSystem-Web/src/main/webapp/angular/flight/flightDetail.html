@@ -96,30 +96,33 @@
                             Prices
                         </td>
                         <td>
-                            {{flight.flightPrices.adult || '0'}} € for an adult<br>
-                            {{flight.flightPrices.teen || '0'}}  € for a teen<br>
-                            {{flight.flightPrices.child || '0'}} € for a child<br>
-                            {{flight.flightPrices.baggageA || '0'}}  € for a baggage of type A<br>
-                            {{flight.flightPrices.baggageB || '0'}} € for a baggage of type B<br>
-                            {{flight.flightPrices.baggageC || '0'}} € for a baggage of type C<br>
-                            {{flight.flightPrices.baggageD || '0'}} € for a baggage of type D<br>
-                            {{flight.flightPrices.baggageE || '0'}} € for a baggage of type E<br>
-                            {{flight.flightPrices.baggageSport || '0'}} € for a sport equipment<br>
-                            {{flight.flightPrices.baggageMusical || '0'}} € for a musical equipment<br>
-                            {{flight.flightPrices.firstClass || '0'}} € for a 1st class<br>
-                            {{flight.flightPrices.secondClass || '0'}} € for a 2nd class<br>
-                            {{flight.flightPrices.businessClass || '0'}} € for a business class<br>
-                            {{flight.flightPrices.economyClass || '0'}} € for an economy class<br>
-                            {{flight.flightPrices.paymentFee || '0'}} € for a payment fee<br>
-                            {{flight.flightPrices.airportTaxFee || '0'}} € for an airport tax<br>
-                            {{flight.flightPrices.smsFlightInfo || '0'}} € for an SMS about flight info<br>
-                            {{flight.flightPrices.offlineCheckIn || '0'}} € for an offline check-in<br>
+                            {{flight.flightPrices[0].adult || '0'}} € for an adult<br>
+                            {{flight.flightPrices[0].teen || '0'}}  € for a teen<br>
+                            {{flight.flightPrices[0].child || '0'}} € for a child<br>
+                            {{flight.flightPrices[0].baggageA || '0'}}  € for a baggage of type A<br>
+                            {{flight.flightPrices[0].baggageB || '0'}} € for a baggage of type B<br>
+                            {{flight.flightPrices[0].baggageC || '0'}} € for a baggage of type C<br>
+                            {{flight.flightPrices[0].baggageD || '0'}} € for a baggage of type D<br>
+                            {{flight.flightPrices[0].baggageE || '0'}} € for a baggage of type E<br>
+                            {{flight.flightPrices[0].baggageSport || '0'}} € for a sport equipment<br>
+                            {{flight.flightPrices[0].baggageMusical || '0'}} € for a musical equipment<br>
+                            {{flight.flightPrices[0].firstClass || '0'}} € for a 1st class<br>
+                            {{flight.flightPrices[0].secondClass || '0'}} € for a 2nd class<br>
+                            {{flight.flightPrices[0].businessClass || '0'}} € for a business class<br>
+                            {{flight.flightPrices[0].economyClass || '0'}} € for an economy class<br>
+                            {{flight.flightPrices[0].paymentFee || '0'}} € for a payment fee<br>
+                            {{flight.flightPrices[0].airportTaxFee || '0'}} € for an airport tax<br>
+                            {{flight.flightPrices[0].smsFlightInfo || '0'}} € for an SMS about flight info<br>
+                            {{flight.flightPrices[0].offlineCheckIn || '0'}} € for an offline check-in<br>
                         </td>
                     </tr>
                 </table>
                 <center>
                     <button type="button" class="btn btn-info" ng-click="goToFlightList()">
                         Back to list of flights
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-click="deleteFlight(flight)">
+                        Remove flight
                     </button>
                 </center>
             </div>

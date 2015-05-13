@@ -10,13 +10,13 @@ import cz.fi.muni.pa036.airticketbooking.api.dto.FlightPriceDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightTicketDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightTicketPriceDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightTicketWithPriceDto;
+import cz.fi.muni.pa036.airticketbooking.api.dto.SeatReservationDto;
 import cz.fi.muni.pa036.airticketbooking.api.service.FlightService;
 import cz.fi.muni.pa036.airticketbooking.api.service.TicketReservationService;
-import cz.fi.muni.pa036.airticketbooking.converter.FlightTicketPriceConverter;
+import cz.fi.muni.pa036.airticketbooking.converter.FlightTicketConverter;
 import cz.fi.muni.pa036.airticketbooking.dao.FlightTicketDao;
 import cz.fi.muni.pa036.airticketbooking.dao.FlightTicketPriceDao;
-import cz.fi.muni.pa036.airticketbooking.entity.FlightTicket;
-import cz.fi.muni.pa036.airticketbooking.entity.FlightTicketPrice;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -78,15 +78,15 @@ public class TicketReservationServiceImpl implements TicketReservationService {
         
         flightTicket.setFlight(this.getFlight(flightTicketWithPriceDto.getFlight().getId()));
         flightTicket.setFlightTicketPrices(flightTicketPrices);
-        flightTicket.setPassangerIdNumeric(flightTicketWithPriceDto.getPassangerIdNumeric());
-        flightTicket.setPassangerMiddleName(flightTicketWithPriceDto.getPassangerMiddleName());
-        flightTicket.setPassangerName(flightTicketWithPriceDto.getPassangerName());
-        flightTicket.setPassangerPhoneNumeric(flightTicketWithPriceDto.getPassangerPhoneNumeric());
-        flightTicket.setPassangerResidance(flightTicketWithPriceDto.getPassangerResidance());
-        flightTicket.setPassangerSurname(flightTicketWithPriceDto.getPassangerSurname());
-        flightTicket.setPassangerTitle(flightTicketWithPriceDto.getPassangerTitle());
-        flightTicket.setSeatReservations(flightTicketWithPriceDto.getSeatReservations());
-        flightTicket.setNextFlightTicket(nextTicketId);
+        flightTicket.setPassangerIdNumeric(flightTicketWithPriceDto.getPassangerIdNumeric() == null ? "" : flightTicketWithPriceDto.getPassangerIdNumeric());
+        flightTicket.setPassangerMiddleName(flightTicketWithPriceDto.getPassangerMiddleName() == null ? "" : flightTicketWithPriceDto.getPassangerMiddleName());
+        flightTicket.setPassangerName(flightTicketWithPriceDto.getPassangerName() == null ? "" : flightTicketWithPriceDto.getPassangerName());
+        flightTicket.setPassangerPhoneNumeric(flightTicketWithPriceDto.getPassangerPhoneNumeric() == null ? "" : flightTicketWithPriceDto.getPassangerPhoneNumeric());
+        flightTicket.setPassangerResidance(flightTicketWithPriceDto.getPassangerResidance() == null ? "" : flightTicketWithPriceDto.getPassangerResidance());
+        flightTicket.setPassangerSurname(flightTicketWithPriceDto.getPassangerSurname() == null ? "" : flightTicketWithPriceDto.getPassangerSurname());
+        flightTicket.setPassangerTitle(flightTicketWithPriceDto.getPassangerTitle() == null ? "" : flightTicketWithPriceDto.getPassangerTitle());
+        flightTicket.setSeatReservations(flightTicketWithPriceDto.getSeatReservations() == null ? new HashSet<SeatReservationDto>() : flightTicketWithPriceDto.getSeatReservations());
+        flightTicket.setNextFlightTicket(nextTicketId == null ? 0 : nextTicketId);
         
         switch (flightTicketWithPriceDto.getAge()) {
             case "adult":
@@ -118,20 +118,28 @@ public class TicketReservationServiceImpl implements TicketReservationService {
             default:
                 throw new IllegalArgumentException("Invalid value of filed 'age': " + flightTicketWithPriceDto.getAge());
         }
-        if (flightTicketWithPriceDto.getOfflineCheckIn()) {
-            flightTicketPrice.setOfflineCheckIn(flightPrices.getOfflineCheckIn());
+        
+        if (flightTicketWithPriceDto.getOfflineCheckIn() == null) {
+            flightTicketPrice.setOfflineCheckIn(new BigDecimal(0));            
+        } else {
+            if (flightTicketWithPriceDto.getOfflineCheckIn()) {
+                flightTicketPrice.setOfflineCheckIn(flightPrices.getOfflineCheckIn());
+            } 
         }
-        if (flightTicketWithPriceDto.getSmsFlightInfo()) {
-            flightTicketPrice.setSmsFlightInfo(flightPrices.getSmsFlightInfo());
+        
+        if (flightTicketWithPriceDto.getSmsFlightInfo() == null) {
+            flightTicketPrice.setSmsFlightInfo(new BigDecimal(0));
+        } else {            
+            if (flightTicketWithPriceDto.getSmsFlightInfo()) {
+                flightTicketPrice.setSmsFlightInfo(flightPrices.getSmsFlightInfo());
+            } 
         }
 
-        flightTicketPrice.setAirportTaxFee(flightPrices.getAirportTaxFee());
-        flightTicketPrice.setPaymentFee(flightPrices.getPaymentFee());
+        flightTicketPrice.setAirportTaxFee(flightPrices.getAirportTaxFee() == null ? new BigDecimal(0) : flightPrices.getAirportTaxFee());
+        flightTicketPrice.setPaymentFee(flightPrices.getPaymentFee() == null ? new BigDecimal(0) : flightPrices.getPaymentFee());
         flightTicketPrice.setFlightTicket(flightTicket);
-        
-        flightTicketDao.create(new FlightTicket());
-        flightTicketPriceDao.create(new FlightTicketPrice());
-        flightTicketPriceDao.create(FlightTicketPriceConverter.flightTicketPriceDtoToEntity(flightTicketPrice));
+        flightTicketDao.create(FlightTicketConverter.flightTicketDtoToEntity(flightTicket));
+        //flightTicketPriceDao.create(FlightTicketPriceConverter.flightTicketPriceDtoToEntity(flightTicketPrice));
                 
         return flightTicket.getId();
     }

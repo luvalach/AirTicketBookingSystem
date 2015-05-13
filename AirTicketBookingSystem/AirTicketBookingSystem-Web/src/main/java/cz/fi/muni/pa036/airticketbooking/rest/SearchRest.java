@@ -2,16 +2,15 @@ package cz.fi.muni.pa036.airticketbooking.rest;
 
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightPriceDto;
-import cz.fi.muni.pa036.airticketbooking.api.dto.FlightTicketDto;
+import cz.fi.muni.pa036.airticketbooking.api.service.AirportService;
 import cz.fi.muni.pa036.airticketbooking.api.service.FlightService;
-import cz.fi.muni.pa036.airticketbooking.api.service.SecurityService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,44 +21,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Tomas Smetanka
  */
 @RestController
-@RequestMapping("/flight")
-public class FlightRest {
+@RequestMapping("/search")
+public class SearchRest {
 
     @Autowired
     FlightService flightService;
     
     @Autowired
-    SecurityService securityService;
+    AirportService airportService;
     
-    @RequestMapping(method = RequestMethod.GET)
-    public List<FlightDto> getFlightList() {
-        List<FlightDto> flightList = flightService.getAll();
+    @RequestMapping(value = "/{from}/{to}/{departure}", method = RequestMethod.GET)
+    public List<FlightDto> getFlights(@PathVariable Long from, @PathVariable Long to, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date departure) {
+        List<FlightDto> flightList = flightService.getByFromToAirportAndDepartureDate(airportService.getById(from), airportService.getById(to), departure);
         if (flightList == null) {
             flightList = new ArrayList<>();
         }
-        return this.eliminateInfiniteRecursive(flightList);
-    }
-
-    @RequestMapping(value = "{flightId}", method = RequestMethod.GET)
-    public FlightDto getFlightDetail(@PathVariable Long flightId) {
-        FlightDto flight = flightService.getById(flightId);
-        return this.eliminateInfiniteRecursive(flight);
-    }
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public void createFlight(@RequestBody @Valid FlightDto flight) {
-  	flightService.create(flight);
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public void updateFlight(@RequestBody @Valid FlightDto flight) {
-        flightService.update(flight);
-    }
-    
-    @RequestMapping(value = "{flightId}", method = RequestMethod.DELETE)
-    public void deleteFlight(@PathVariable Long flightId) {
-	FlightDto flight = flightService.getById(flightId);
-        flightService.delete(flight);
+        return eliminateInfiniteRecursive(flightList);
     }
     
     /**

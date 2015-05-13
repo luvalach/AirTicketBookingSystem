@@ -55,10 +55,15 @@ public class TicketReservationRest {
     
 
     private FlightDto eliminateInfiniteRecursiveFromDepthObjects(FlightDto flight) {
-               for (FlightTicketDto flightTicket : flight.getFlightTickets()) {
-            flightTicket.setFlight(null);
+        for (FlightTicketDto flightTicket : flight.getFlightTickets()) {
+           flightTicket.setFlight(null);
         }
 
+        Iterator<FlightTicketDto> flightTicketsIterator = flight.getFlightTickets().iterator();
+        while(flightTicketsIterator.hasNext()){
+            flightTicketsIterator.next().setFlightTicketPrices(null);
+        }
+        
         Iterator<FlightPriceDto> flightPricesIterator = flight.getFlightPrices().iterator();
         while(flightPricesIterator.hasNext()){
             flightPricesIterator.next().setFlight(null);

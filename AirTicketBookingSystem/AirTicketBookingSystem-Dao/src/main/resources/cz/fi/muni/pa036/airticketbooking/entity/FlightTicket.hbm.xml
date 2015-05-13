@@ -13,7 +13,7 @@
         <many-to-one name="flight" class="cz.fi.muni.pa036.airticketbooking.entity.Flight" fetch="select">
             <column name="flight_id" not-null="true" />
         </many-to-one>
-        <property name="nextFlightTicket" type="java.lang.Integer">
+        <property name="nextFlightTicket" type="long">
             <column name="next_flight_ticket" />
         </property>
         <property name="passangerName" type="string">
@@ -40,7 +40,7 @@
         <property name="checkedIn" type="java.lang.Character">
             <column name="checked_in" length="1" />
         </property>
-        <set name="flightTicketPrices" inverse="true">
+        <set name="flightTicketPrices" inverse="true" cascade="all">
             <key>
                 <column name="flight_ticket_id" not-null="true" />
             </key>

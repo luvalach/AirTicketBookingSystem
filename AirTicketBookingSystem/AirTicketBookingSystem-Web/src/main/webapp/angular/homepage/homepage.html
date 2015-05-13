@@ -12,20 +12,19 @@
                 <table class="search">
                     <tr>
                         <td colspan="6">
-                            <form action="###???" method='POST'>
-                            <input type="text" id="from" size="80" placeholder="From" class="form-control">
+                            <strong>From: </strong><select ng-model="search.airportByAirportFromId" ng-options="airport.name for airport in airports track by airport.name" class="form-control" required></select>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="6">
-                            <input type="text" id="to" size="80" placeholder="To" class="form-control">
+                            <strong>To: </strong><select ng-model="search.airportByAirportToId" ng-options="airport.name for airport in airports track by airport.name" class="form-control" required></select>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <div ng-controller="Datepicker">
                                 <p class="input-group"> 
-                                    <input type="text" id="departureDate" placeholder="Departure date" class="form-control" datepicker-popup="d.M.yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true">
+                                    <input ng-model="search.departure" type="text" id="departureDate" placeholder="Departure date" class="form-control" datepicker-popup="d.M.yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true">
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
@@ -37,7 +36,7 @@
                         <td colspan="2">
                             <div ng-controller="Datepicker">
                                 <p class="input-group"> 
-                                    <input type="text" id="departureReturnDate" placeholder="Return date" class="form-control" datepicker-popup="d.M.yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true">
+                                    <input ng-model="search.return" type="text" id="departureReturnDate" placeholder="Return date" class="form-control" datepicker-popup="d.M.yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true">
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
@@ -105,8 +104,7 @@
                         </td>
                         
                         <td colspan="3">
-                            <input type="submit" value="Search flights" class="form-control">
-                            </form>
+                            <input type="submit" value="Search flights" class="form-control" ng-click="search()">
                         </td>
                     </tr>
 

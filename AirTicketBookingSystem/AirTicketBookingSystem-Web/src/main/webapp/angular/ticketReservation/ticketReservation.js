@@ -70,12 +70,13 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
             "offlineCheckIn": null
         };
 
-        $scope.addNewTicket = function () {
+        $scope.addNewTicket = function () {    
             $scope.ticket.flight = angular.copy($scope.flight);
             $rootScope.tickets.push(angular.copy($scope.ticket));
         };
 
-        $scope.editTicket = function () {
+        $scope.editTicket = function () {                        
+            $log.info($scope.flight);
             $scope.ticket.flight = $scope.flight;
             $rootScope.tickets.push($scope.ticket);
         };
@@ -143,5 +144,4 @@ ticketReservationServices.factory('TicketReservationService', ['$resource', func
                 delete: {method: 'DELETE', isArray: false}
             });
         };
-    }])
-        ;
+    }]);

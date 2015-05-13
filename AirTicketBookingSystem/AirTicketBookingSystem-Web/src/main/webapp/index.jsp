@@ -21,6 +21,7 @@
         <script src="js/angular-datetimepicker.js"></script>
         <script src="angular/lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
         <!--User JS -->
+        <script src="angular/homepage/searchCtrl.js"></script>
         <script src="angular/user/userCtrl.js"></script>
         <script src="angular/city/cityCtrl.js"></script>
         <script src="angular/airport/airportCtrl.js"></script>

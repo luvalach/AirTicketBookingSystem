@@ -22,9 +22,9 @@ public class FlightTicket  implements java.io.Serializable {
      private String passangerIdNumeric;
      private String passangerPhoneNumeric;
      private Character checkedIn;
-     private Set flightTicketPrices = new HashSet(0);
-     private Set seatReservations = new HashSet(0);
-     private Set baggages = new HashSet(0);
+     private Set<FlightTicketPrice> flightTicketPrices = new HashSet(0);
+     private Set<SeatReservation> seatReservations = new HashSet(0);
+     private Set<Baggage> baggages = new HashSet(0);
 
     public FlightTicket() {
     }
@@ -34,7 +34,7 @@ public class FlightTicket  implements java.io.Serializable {
         this.id = id;
         this.flight = flight;
     }
-    public FlightTicket(Long id, Flight flight, Long nextFlightTicket, String passangerName, String passangerSurname, String passangerMiddleName, String passangerTitle, String passangerResidance, String passangerIdNumeric, String passangerPhoneNumeric, Character checkedIn, Set flightTicketPrices, Set seatReservations, Set baggages) {
+    public FlightTicket(Long id, Flight flight, Long nextFlightTicket, String passangerName, String passangerSurname, String passangerMiddleName, String passangerTitle, String passangerResidance, String passangerIdNumeric, String passangerPhoneNumeric, Character checkedIn, Set<FlightTicketPrice> flightTicketPrices, Set<SeatReservation> seatReservations, Set<Baggage> baggages) {
        this.id = id;
        this.flight = flight;
        this.nextFlightTicket = nextFlightTicket;
@@ -128,30 +128,32 @@ public class FlightTicket  implements java.io.Serializable {
     public void setCheckedIn(Character checkedIn) {
         this.checkedIn = checkedIn;
     }
-    public Set getFlightTicketPrices() {
+    public Set<FlightTicketPrice> getFlightTicketPrices() {
         return this.flightTicketPrices;
     }
     
-    public void setFlightTicketPrices(Set flightTicketPrices) {
+    public void setFlightTicketPrices(Set<FlightTicketPrice> flightTicketPrices) {
         this.flightTicketPrices = flightTicketPrices;
     }
-    public Set getSeatReservations() {
+    public Set<SeatReservation> getSeatReservations() {
         return this.seatReservations;
     }
     
-    public void setSeatReservations(Set seatReservations) {
+    public void setSeatReservations(Set<SeatReservation> seatReservations) {
         this.seatReservations = seatReservations;
     }
-    public Set getBaggages() {
+    public Set<Baggage> getBaggages() {
         return this.baggages;
     }
     
-    public void setBaggages(Set baggages) {
+    public void setBaggages(Set<Baggage> baggages) {
         this.baggages = baggages;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "FlightTicket{" + "id=" + id + ", flight=" + flight + ", nextFlightTicket=" + nextFlightTicket + ", passangerName=" + passangerName + ", passangerSurname=" + passangerSurname + ", passangerMiddleName=" + passangerMiddleName + ", passangerTitle=" + passangerTitle + ", passangerResidance=" + passangerResidance + ", passangerIdNumeric=" + passangerIdNumeric + ", passangerPhoneNumeric=" + passangerPhoneNumeric + ", checkedIn=" + checkedIn + ", flightTicketPrices=" + flightTicketPrices + ", seatReservations=" + seatReservations + ", baggages=" + baggages + '}';
+    }
 
 }
 
