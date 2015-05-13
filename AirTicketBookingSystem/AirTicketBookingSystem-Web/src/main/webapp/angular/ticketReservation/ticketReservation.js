@@ -75,10 +75,10 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
         };
 
         //Save modified ticket
-        $scope.editTicket = function () {
-            $scope.ticket.flight = $scope.flight;
-            $rootScope.tickets.push($scope.ticket);
-        };
+//        $scope.editTicket = function () {
+//            $scope.ticket.flight = $scope.flight;
+//            $rootScope.tickets.push($scope.ticket);
+//        };
 
         //Save new of modified ticket
         $scope.save = function () {
@@ -143,7 +143,7 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
                             if ($scope.editMode) {
                                 $scope.saveButtonText = "Save changes";
                             } else {
-                                $scope.saveButtonText = "Save as new reservation";
+                                $scope.saveButtonText = "Save reservation";
                             }
                         }, 500);
                     });
@@ -172,7 +172,22 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
         };
 
         $scope.goToSearch = function () {
-            $window.location.href = '/AirTicketBooking/#/ticketReservation';
+            $window.location.href = '/AirTicketBooking/#/';
+        };
+
+        $scope.nextTicketForThisFlight = function () {
+            $scope.showTicketForm = true;
+            $scope.editMode = false;
+            $scope.ticket = angular.copy($scope.ticket);
+            $scope.saveButtonText = "Save reservation";
+        };
+
+        $scope.delete = function () {
+            if ($scope.editMode) {
+                var index = $rootScope.tickets.indexOf($scope.ticket);
+                $rootScope.tickets.splice(index, 1);
+            }
+            $scope.showTicketForm = false;
         };
 
     }]);
