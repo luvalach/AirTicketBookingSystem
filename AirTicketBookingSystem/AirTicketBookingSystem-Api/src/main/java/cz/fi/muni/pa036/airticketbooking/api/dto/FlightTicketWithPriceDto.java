@@ -32,6 +32,8 @@ public class FlightTicketWithPriceDto  implements java.io.Serializable {
      private Character checkedIn;
      private Set<SeatReservationDto> seatReservations = new HashSet(0);
      private Set<BaggageDto> baggages = new HashSet(0);
+     public String seat;
+     public Long baggage[] = new Long[7];
     
      @Pattern(message = "Passenger's age has to be set (adult, teen or child)", regexp = "(adult|teen|child)")
      private String age = "adult";

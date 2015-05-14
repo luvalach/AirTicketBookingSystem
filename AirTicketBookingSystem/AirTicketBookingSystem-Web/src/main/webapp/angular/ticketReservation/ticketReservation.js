@@ -86,14 +86,16 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
             "passangerIdNumeric": null,
             "passangerPhoneNumeric": null,
             "checkedIn": null,
-            "seatReservations": [],
+            "seatReservations": null,
             "baggages": [],
             "age": "adult",
             "ticketClass": "second",
             "paymentFee": null,
             "airportTaxFee": null,
             "smsFlightInfo": false,
-            "offlineCheckIn": false
+            "offlineCheckIn": false,
+            "seat":"nextToWindow",
+            "baggage":[]
         };
 
         $scope.setFlightIntoTicket = function () {
@@ -125,13 +127,13 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
             if ($scope.ticket.age === "adult") cost += $scope.flight.flightPrices[0].adult;
             if ($scope.ticket.age === "teen") cost += $scope.flight.flightPrices[0].teen;
             if ($scope.ticket.age === "child") cost += $scope.flight.flightPrices[0].child;
-            if ($scope.ticket.baggages[0] > 0) cost += ($scope.flight.flightPrices[0].baggageA * $scope.ticket.baggages[0]);
-            if ($scope.ticket.baggages[1] > 0) cost += ($scope.flight.flightPrices[0].baggageB * $scope.ticket.baggages[1]); 
-            if ($scope.ticket.baggages[2] > 0) cost += ($scope.flight.flightPrices[0].baggageC * $scope.ticket.baggages[2]); 
-            if ($scope.ticket.baggages[3] > 0) cost += ($scope.flight.flightPrices[0].baggageD * $scope.ticket.baggages[3]); 
-            if ($scope.ticket.baggages[4] > 0) cost += ($scope.flight.flightPrices[0].baggageE * $scope.ticket.baggages[4]); 
-            if ($scope.ticket.baggages[5] > 0) cost += ($scope.flight.flightPrices[0].baggageSport * $scope.ticket.baggages[5]); 
-            if ($scope.ticket.baggages[6] > 0) cost += ($scope.flight.flightPrices[0].baggageMusical * $scope.ticket.baggages[6]); 
+            if ($scope.ticket.baggage[0] > 0) cost += ($scope.flight.flightPrices[0].baggageA * $scope.ticket.baggage[0]);
+            if ($scope.ticket.baggage[1] > 0) cost += ($scope.flight.flightPrices[0].baggageB * $scope.ticket.baggage[1]); 
+            if ($scope.ticket.baggage[2] > 0) cost += ($scope.flight.flightPrices[0].baggageC * $scope.ticket.baggage[2]); 
+            if ($scope.ticket.baggage[3] > 0) cost += ($scope.flight.flightPrices[0].baggageD * $scope.ticket.baggage[3]); 
+            if ($scope.ticket.baggage[4] > 0) cost += ($scope.flight.flightPrices[0].baggageE * $scope.ticket.baggage[4]); 
+            if ($scope.ticket.baggage[5] > 0) cost += ($scope.flight.flightPrices[0].baggageSport * $scope.ticket.baggage[5]); 
+            if ($scope.ticket.baggage[6] > 0) cost += ($scope.flight.flightPrices[0].baggageMusical * $scope.ticket.baggage[6]); 
             if ($scope.ticket.ticketClass === "first") cost += $scope.flight.flightPrices[0].firstClass;
             if ($scope.ticket.ticketClass === "second") cost += $scope.flight.flightPrices[0].secondClass;    
             if ($scope.ticket.ticketClass === "business") cost += $scope.flight.flightPrices[0].businessClass;    
