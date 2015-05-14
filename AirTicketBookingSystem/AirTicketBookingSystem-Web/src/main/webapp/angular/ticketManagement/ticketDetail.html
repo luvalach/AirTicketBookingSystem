@@ -106,6 +106,16 @@
                             <td>
                                 <span editable-text="ticket.checkedIn">{{ticket.checkedIn}}</span> 
                             </td>
+                        </tr>nextFlightTicket
+                        <tr>
+                            <td>
+                                Next flight ticket
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" ng-click="goToTicketDetail(ticket.nextFlightTicket)">
+                                    Open
+                                </button>
+                            </td>
                         </tr>
                     </table>
                     <center>

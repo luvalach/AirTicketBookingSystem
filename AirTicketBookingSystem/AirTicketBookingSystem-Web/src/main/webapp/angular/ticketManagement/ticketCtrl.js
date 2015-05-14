@@ -73,7 +73,11 @@ ticketControllers.controller('TicketDetailCtrl', ['$scope', '$routeParams', '$wi
         $scope.goToTicketList = function () {
             $window.location.href = '/AirTicketBooking/#/ticket';
         };
-
+        
+        $scope.goToTicketDetail = function (ticketId) {
+            $window.location.href = '/AirTicketBooking/#/ticket/'+ticketId;
+        };
+        
         $scope.updateTicket = function (ticket) {
             $log.info("Saving ticket with ID: " + ticket.id);
             TicketService("").update(ticket,
