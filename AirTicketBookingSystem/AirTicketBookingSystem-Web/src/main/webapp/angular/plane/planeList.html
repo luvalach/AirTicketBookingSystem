@@ -25,20 +25,17 @@
                                 Type
                                 <span  ng-class="getOrderIcon('type')"/>
                             </td>
-                            <td ng-click="sortByField('creation_date')">
-                                Creation date
-                                <span  ng-class="getOrderIcon('creation_date')"/>
+                            <td ng-click="sortByField('creationDate')">
+                                Manufactured
+                                <span  ng-class="getOrderIcon('creationDate')"/>
                             </td>
-                            <td ng-click="sortByField('max_seats')">
+                            <td ng-click="sortByField('maxSeats')">
                                 Maximum seats
-                                <span  ng-class="getOrderIcon('max_seats')"/>
+                                <span  ng-class="getOrderIcon('maxSeats')"/>
                             </td>
                             <td ng-click="sortByField('airline')">
                                 Airline
                                 <span  ng-class="getOrderIcon('airline')"/>
-                            </td>
-                            <td>
-                                Show details
                             </td>
                         </tr>
                     </thead>
@@ -53,13 +50,13 @@
                             {{plane.type}}
                         </td>
                          <td>
-                            {{plane.creation_date}}
+                            {{plane.creationDate}}
                         </td>
                         <td>
-                            {{plane.max_seats}}
+                            {{plane.maxSeats}}
                         </td>
                         <td>
-                            {{plane.airline_id}}
+                            {{plane.airlineDto.name}}
                         </td>
                     </tr>
                 </table>
