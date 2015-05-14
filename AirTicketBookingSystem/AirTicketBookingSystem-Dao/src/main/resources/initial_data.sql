@@ -1,7 +1,12 @@
-CREATE SEQUENCE s_flight_price START 101;
-CREATE SEQUENCE s_flight START 101;
-CREATE SEQUENCE s_flight_ticket_price START 101;
-CREATE SEQUENCE s_flight_ticket START 101;
+DROP SEQUENCE IF EXISTS s_flight_price;
+DROP SEQUENCE IF EXISTS s_flight;
+DROP SEQUENCE IF EXISTS s_flight_ticket_price;
+DROP SEQUENCE IF EXISTS s_flight_ticket;
+
+CREATE SEQUENCE s_flight_price START 501;
+CREATE SEQUENCE s_flight START 501;
+CREATE SEQUENCE s_flight_ticket_price START 501;
+CREATE SEQUENCE s_flight_ticket START 501;
 
 -- Airline basic confirguration
 INSERT INTO airline (id, name, code, main_airline) VALUES (1, 'Lufthansa', 'LH', 1);

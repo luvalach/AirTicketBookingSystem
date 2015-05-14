@@ -11,7 +11,7 @@
             </generator>
         </id>
         <many-to-one name="flight" class="cz.fi.muni.pa036.airticketbooking.entity.Flight" fetch="select">
-            <column name="flight_id" not-null="true" />
+            <column name="flight_id" not-null="false" />
         </many-to-one>
         <property name="adult" type="big_decimal">
             <column name="adult" precision="6" />

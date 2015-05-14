@@ -75,11 +75,13 @@ public class FlightPriceRest {
      * converted to json
      */
     private FlightPriceDto eliminateInfiniteRecursive(FlightPriceDto flightPrice) {
-        flightPrice.getFlight().setAirportByAirportFromId(null);
-        flightPrice.getFlight().setAirportByAirportToId(null);
-        flightPrice.getFlight().setFlightPrices(null);
-        flightPrice.getFlight().setFlightTickets(null);
-        flightPrice.getFlight().setPlane(null);
+        if (flightPrice.getFlight() != null) {
+            flightPrice.getFlight().setAirportByAirportFromId(null);
+            flightPrice.getFlight().setAirportByAirportToId(null);
+            flightPrice.getFlight().setFlightPrices(null);
+            flightPrice.getFlight().setFlightTickets(null);
+            flightPrice.getFlight().setPlane(null);
+        }
         
         return flightPrice;
     }

@@ -2,12 +2,15 @@ package cz.fi.muni.pa036.airticketbooking.service;
 
 import cz.fi.muni.pa036.airticketbooking.api.dto.AirportDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightDto;
+import cz.fi.muni.pa036.airticketbooking.api.dto.FlightPriceDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.PlaneDto;
 import cz.fi.muni.pa036.airticketbooking.api.service.FlightService;
 import cz.fi.muni.pa036.airticketbooking.converter.AirportConverter;
 import cz.fi.muni.pa036.airticketbooking.converter.FlightConverter;
+import cz.fi.muni.pa036.airticketbooking.converter.FlightPriceConverter;
 import cz.fi.muni.pa036.airticketbooking.converter.PlaneConverter;
 import cz.fi.muni.pa036.airticketbooking.dao.FlightDao;
+import cz.fi.muni.pa036.airticketbooking.dao.FlightPriceDao;
 import cz.fi.muni.pa036.airticketbooking.entity.Flight;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +30,9 @@ public class FlightServiceImpl implements FlightService {
 
     @Autowired
     private FlightDao flightDao;    
+
+    @Autowired
+    private FlightPriceDao flightPriceDao;    
 
     public void setDAO(FlightDao flightDao) {
         this.flightDao = flightDao;
@@ -49,6 +55,10 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void delete(FlightDto entity) {
+        for (FlightPriceDto parentFlightPriceDto : entity.getFlightPrices()) {
+            parentFlightPriceDto.setFlight(null);
+            flightPriceDao.update(FlightPriceConverter.flightPriceDtoToEntity(parentFlightPriceDto));
+        }
         Flight flight = FlightConverter.flightDtoToEntity(entity);
         flightDao.delete(flight);
     }

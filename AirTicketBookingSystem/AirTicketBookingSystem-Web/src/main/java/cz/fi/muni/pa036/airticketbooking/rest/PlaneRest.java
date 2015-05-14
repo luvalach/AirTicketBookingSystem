@@ -85,8 +85,8 @@ public class PlaneRest {
             flight.setFlightTickets(null);
             flight.setPlane(plane);
         }
-        plane.getAirlineDto().setAdministrators(null);
-        plane.getAirlineDto().setPlanes(null);
+        //plane.getAirlineDto().setAdministrators(null);
+        //plane.getAirlineDto().setPlanes(null);
         for (SeatDto seat : plane.getSeats()) {
             seat.setAirplane(null);
         }

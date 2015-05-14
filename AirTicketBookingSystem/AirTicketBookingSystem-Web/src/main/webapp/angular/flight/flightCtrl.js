@@ -90,7 +90,7 @@ flightControllers.controller('FlightDetailCtrl', ['$scope', '$routeParams', '$wi
         
     }]);
 
-flightControllers.controller('FlightCreateCtrl', ['$scope', '$routeParams', '$window', '$log', 'FlightService'/*, 'PlaneService'*/, 'AirportService', function ($scope, $routeParams, $window, $log, FlightService/*, PlaneService*/, AirportService) {
+flightControllers.controller('FlightCreateCtrl', ['$scope', '$routeParams', '$window', '$log', 'FlightService', 'PlaneService', 'AirportService', function ($scope, $routeParams, $window, $log, FlightService, PlaneService, AirportService) {
         $scope.errorMessages = {
             "fieldErrors": []
         };
@@ -107,9 +107,11 @@ flightControllers.controller('FlightCreateCtrl', ['$scope', '$routeParams', '$wi
 
         $scope.flight.departure = new Date();
         $scope.flight.arrival = new Date();
+        $scope.repeatEvery = 10;
+        $scope.repeatFor = 3;
     
         // flight and airport FK
-        /*$scope.planes = PlaneService("").query();*/
+        $scope.planes = PlaneService("").query();
         $scope.airports = AirportService("").query();
     
     
@@ -117,22 +119,40 @@ flightControllers.controller('FlightCreateCtrl', ['$scope', '$routeParams', '$wi
             $window.location.href = '/AirTicketBooking/#/flight';
         };
 
+        function daysAfter(d, days) {
+          var nd = new Date(d.getTime());
+          nd.setDate(d.getDate() + days);
+          return nd;
+        }
+        
         $scope.createFlight = function () {
             $log.info("Creating flight with code: " + $scope.flight.code);
-            /*$scope.flight.plane = $scope.plane;*/ 
+            $scope.flight.plane = $scope.plane;
             $scope.flight.airportByAirportFromId = $scope.airportByAirportFromId;
-            $scope.flight.airportByAirportToId = $scope.airportByAirportToId; 
+            $scope.flight.airportByAirportToId = $scope.airportByAirportToId;
+            
+//            if ($scope.repeatFor != '' && $scope.repeatFor != 0) {
+//                for (i = 0; i < $scope.repeatFor; i++) {
+//                    $log.info("departure: " + $scope.flight.departure);
+//                    $log.info("arrival: " + $scope.flight.arrival);
+                    
+                    FlightService("").create($scope.flight,
+                    function (data, status, headers, config) {
+                        $log.info("Flight created");
+                        $scope.validationErrors = {};
+                        $scope.goToFlightList();
+                    },
+                    function (data, status, headers, config) {
+                        $log.error("An error occurred on server! Flight cannot be created.");
+                        $scope.errorMessages = data.data;
+                    });
+              
+//                    $scope.flight.departure = daysAfter($scope.flight.departure, $scope.repeatEvery);
+//                    $scope.flight.arrival = daysAfter($scope.flight.arrival, $scope.repeatEvery);
+//                }
+//            }
 
-            FlightService("").create($scope.flight,
-            function (data, status, headers, config) {
-                $log.info("Flight created");
-                $scope.validationErrors = {};
-                $scope.goToFlightList();
-            },
-            function (data, status, headers, config) {
-                $log.error("An error occurred on server! Flight cannot be created.");
-                $scope.errorMessages = data.data;
-            });
+//            $scope.goToFlightList();
         };
 
         $scope.showFlightDetail = function (flightId) {

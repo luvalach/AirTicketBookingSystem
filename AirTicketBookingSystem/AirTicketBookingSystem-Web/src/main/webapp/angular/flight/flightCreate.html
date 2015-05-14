@@ -64,7 +64,16 @@
                                 </span>
                             </p>
                         </td>
-                    </tr>
+                    </tr><!--
+                    <tr>
+                        <td> 
+                            Repeated flight
+                        </td>
+                        <td>
+                            Repeat flight every <span editable-text="repeatEvery" onbeforesave="" >{{repeatEvery || '0' }}</span> day(s) 
+                            for <span editable-text="repeatFor" onbeforesave="" >{{repeatFor || '0' }}</span> time(s).
+                        </td>
+                    </tr>-->
                     <tr>
                         <td>
                             From
@@ -86,7 +95,7 @@
                             Plane
                         </td>
                         <td>
-                             <span editable-text="flight.plane" onbeforesave="">{{flight.plane || 'Set plane' }}</span> TODO
+                             <select ng-model="plane" ng-options="plane.code for plane in planes track by plane.code" class="form-control" style="width: 400px;" required></select>
                         </td>
                     </tr>                   
                 </table>

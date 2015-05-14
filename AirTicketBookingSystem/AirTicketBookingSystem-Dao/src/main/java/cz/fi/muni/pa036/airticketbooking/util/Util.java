@@ -53,10 +53,10 @@ public class Util {
             throw new IllegalArgumentException("FlightPrice cannot be null.") {
             };
         }
-        if (flightPrice.getFlight() == null) {
-            throw new IllegalArgumentException("Flight must be defined for FlightPrice.") {
-            };
-        }
+//        if (flightPrice.getFlight() == null) {
+//            throw new IllegalArgumentException("Flight must be defined for FlightPrice.") {
+//            };
+//        }
         if (flightPrice.getAdult() == null || flightPrice.getBaggageA() == null || flightPrice.getSecondClass() == null) {
             throw new IllegalArgumentException("At least price for an adult, for one baggage type (type A) and for a second class must be defined for FlightPrice.") {
             };

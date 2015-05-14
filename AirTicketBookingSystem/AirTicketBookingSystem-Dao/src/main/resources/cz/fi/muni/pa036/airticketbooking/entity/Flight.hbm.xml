@@ -34,7 +34,7 @@
             </key>
             <one-to-many class="cz.fi.muni.pa036.airticketbooking.entity.FlightPrice" />
         </set>
-        <set name="flightTickets" inverse="true">
+        <set name="flightTickets" inverse="true" cascade="delete-orphan">
             <key>
                 <column name="flight_id" not-null="true" />
             </key>
