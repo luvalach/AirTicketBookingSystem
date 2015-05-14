@@ -33,6 +33,7 @@ public class PlaneConverter {
         p.setCreationDate(plane.getCreationDate());
         p.setMaxSeats(plane.getMaxSeats());
         p.setType(plane.getType());
+        p.set(AirlineConverter.airlineEntityToDto(plane.getAirline()));
         return p;
     }
 

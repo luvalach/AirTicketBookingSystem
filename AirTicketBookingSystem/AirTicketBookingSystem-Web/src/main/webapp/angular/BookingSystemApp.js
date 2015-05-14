@@ -9,6 +9,8 @@ var app = angular.module('airTicketBookingApp', [
     'userServices',
     'cityControllers',
     'cityServices',
+    'planeServices',
+    'planeControllers',
     'airportControllers',
     'airportServices',
     'flightControllers',
@@ -58,6 +60,10 @@ app.config(['$routeProvider',
                 when('/city/detail/:cityId', {
                     templateUrl: 'angular/city/cityDetail.html',
                     controller: 'CityDetailCtrl'
+                }).
+                when('/plane', {
+                    templateUrl: 'angular/plane/planeList.html',
+                    controller: 'PlaneListCtrl'
                 }).
                 when('/airport', {
                     templateUrl: 'angular/airport/airportList.html',

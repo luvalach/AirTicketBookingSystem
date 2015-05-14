@@ -24,6 +24,7 @@
         <script src="angular/homepage/searchCtrl.js"></script>
         <script src="angular/user/userCtrl.js"></script>
         <script src="angular/city/cityCtrl.js"></script>
+        <script src="angular/plane/planeCtrl.js"></script>
         <script src="angular/airport/airportCtrl.js"></script>
         <script src="angular/flight/flightCtrl.js"></script>
         <script src="angular/flightPrice/flightPriceCtrl.js"></script>
@@ -66,6 +67,9 @@
                         </li>
                         <li>
                             <a href="/AirTicketBooking/#/airport">Airports</a>
+                        </li>
+                        <li>
+                            <a href="/AirTicketBooking/#/plane">Planes</a>
                         </li>
                         <li>
                             <a href="/AirTicketBooking/#/flight">Flights</a>
