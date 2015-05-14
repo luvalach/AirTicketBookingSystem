@@ -126,50 +126,120 @@
                                 <div class="form-group">
                                     <div>Age:</div>
                                     <div>
-                                        <input type="radio" id="radioAge1" ng-model="ticket.age" value="adult">
+                                        <input type="radio" id="radioAge1" ng-change="getTotalPrice()" ng-model="ticket.age" value="adult">
                                         <label for="radioAge1">Adult</label> ({{ flight.flightPrices[0].adult || '0'}} {{currency}})
                                     </div>
                                     <div>
-                                        <input type="radio" id="radioAge2" ng-model="ticket.age" value="teen">
+                                        <input type="radio" id="radioAge2" ng-change="getTotalPrice()" ng-model="ticket.age" value="teen">
                                         <label for="radioAge2">Teen</label> ({{ flight.flightPrices[0].teen || '0'}} {{currency}})
 
                                     </div>
                                     <div>
-                                        <input type="radio" id="radioAge3" ng-model="ticket.age" value="child">
+                                        <input type="radio" id="radioAge3" ng-change="getTotalPrice()" ng-model="ticket.age" value="child">
                                         <label for="radioAge3">Child</label> ({{ flight.flightPrices[0].child || '0'}} {{currency}})
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div>Class:</div>
-                                    <div>
-                                        <input type="radio" id="radioClass1" ng-model="ticket.ticketClass" value="first">
-                                        <label for="radioClass1">First</label> ({{ flight.flightPrices[0].firstClass || '0'}} {{currency}})
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="radioClass2" ng-model="ticket.ticketClass" value="second">
-                                        <label for="radioClass2">Second</label> ({{ flight.flightPrices[0].secondClass || '0'}} {{currency}})
+                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <div>Class:</div>
+                                            <div>
+                                                <input type="radio" id="radioClass1" ng-change="countSeats();getTotalPrice()" ng-model="ticket.ticketClass" value="first">
+                                                <label for="radioClass1">First</label> ({{ flight.flightPrices[0].firstClass || '0'}} {{currency}})
+                                            </div>
+                                            <div>
+                                                <input type="radio" id="radioClass2" ng-change="countSeats();getTotalPrice()" ng-model="ticket.ticketClass" value="second">
+                                                <label for="radioClass2">Second</label> ({{ flight.flightPrices[0].secondClass || '0'}} {{currency}})
 
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="radioClass3" ng-model="ticket.ticketClass" value="business">
-                                        <label for="radioClass3">Business</label> ({{ flight.flightPrices[0].businessClass || '0'}} {{currency}})
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="radioClass4" ng-model="ticket.ticketClass" value="economy">
-                                        <label for="radioClass4">Economy</label> ({{ flight.flightPrices[0].economyClass || '0'}} {{currency}})
+                                            </div>
+                                            <div>
+                                                <input type="radio" id="radioClass3" ng-change="countSeats();getTotalPrice()" ng-model="ticket.ticketClass" value="business">
+                                                <label for="radioClass3">Business</label> ({{ flight.flightPrices[0].businessClass || '0'}} {{currency}})
+                                            </div>
+                                            <div>
+                                                <input type="radio" id="radioClass4" ng-change="countSeats();getTotalPrice()" ng-model="ticket.ticketClass" value="economy">
+                                                <label for="radioClass4">Economy</label> ({{ flight.flightPrices[0].economyClass || '0'}} {{currency}})
+                                            </div>                                 
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div>Seat type:</div>
+                                            <div>
+                                                <input type="radio" id="radioClass5" ng-disabled="seatCount[0] == 0" ng-change="countSeats()" ng-model="seat" value="nextToWindow">
+                                                <label for="radioClass1">Next to window</label> ({{ seatCount[0] || '0'}} remaining)
+                                            </div>
+                                            <div>
+                                                <input type="radio" id="radioClass6" ng-disabled="seatCount[1] == 0" ng-change="countSeats()" ng-model="seat" value="inTheMiddle">
+                                                <label for="radioClass2">In the middle</label> ({{ seatCount[1] || '0'}} remaining)
+                                            </div>
+                                            <div>
+                                                <input type="radio" id="radioClass7" ng-disabled="seatCount[2] == 0" ng-change="countSeats()" ng-model="seat" value="nextToAisle">
+                                                <label for="radioClass3">Next to aisle</label> ({{ seatCount[2] || '0'}} remaining)
+                                            </div>
+                                            <div>
+                                                <input type="radio" id="radioClass8" ng-disabled="seatCount[3] == 0" ng-change="countSeats()" ng-model="seat" value="disabledSeating">
+                                                <label for="radioClass4">Disabled seating</label> ({{ seatCount[3] || '0'}} remaining)
+                                            </div>  
+                                        </div>   
                                     </div>
                                 </div>
 
                                 <div class="form-group">
+                                    <div class="row">
                                     <div>Other services:</div>
-                                    <div>
-                                        <input type="checkbox" id="checkboxSmsInfo" ng-model="ticket.smsFlightInfo" ng-true-value="true" ng-false-value="false">
-                                        <label for="checkboxSmsInfo">SMS flight info</label> ({{ flight.flightPrices[0].smsFlightInfo || '0'}} {{currency}})
-                                    </div>
-                                    <div>
-                                        <input type="checkbox" id="checkboxOfflineCheckIn" ng-model="ticket.offlineCheckIn" ng-true-value="true" ng-false-value="false">
-                                        <label for="checkboxOfflineCheckIn">Offline check in</label> ({{ flight.flightPrices[0].offlineCheckIn || '0'}} {{currency}})
+                                        <div class="col-md-3">
+                                            <div>
+                                                <input type="checkbox" id="checkboxSmsInfo" ng-change="getTotalPrice()" ng-model="ticket.smsFlightInfo" ng-true-value="true" ng-false-value="false">
+                                                <label for="checkboxSmsInfo">SMS flight info</label> ({{ flight.flightPrices[0].smsFlightInfo || '0'}} {{currency}})
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" id="checkboxOfflineCheckIn" ng-change="getTotalPrice()" ng-model="ticket.offlineCheckIn" ng-true-value="true" ng-false-value="false">
+                                                <label for="checkboxOfflineCheckIn">Offline check in</label> ({{ flight.flightPrices[0].offlineCheckIn || '0'}} {{currency}})
 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"> </div>
+                                        <div class="col-md-1">
+                                            <div>Baggage:</div>
+                                            <div>A</div>
+                                            <div><input id="spinA" ng-model="ticket.baggages[0]"  ng-change="getTotalPrice()" type="number" value = "0" max="10" min = "0"></div>
+                                            <br>{{ flight.flightPrices[0].baggageA || '0'}} {{currency}}/ea.
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <div>B</div>
+                                            <div><input id="spinB" ng-model="ticket.baggages[1]"  ng-change="getTotalPrice()" type="number" value = "0" max="10" min = "0"></div>
+                                            <br>{{ flight.flightPrices[0].baggageB || '0'}} {{currency}}/ea.
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <div>C</div>
+                                            <div><input id="spinC" ng-model="ticket.baggages[2]"  ng-change="getTotalPrice()" type="number" value = "0" max="10" min = "0"></div>
+                                            <br>{{ flight.flightPrices[0].baggageC || '0'}} {{currency}}/ea.
+                                        </div>
+                                         <div class="col-md-1">
+                                            <br>
+                                            <div>D</div>
+                                            <div><input id="spinD" ng-model="ticket.baggages[3]"  ng-change="getTotalPrice()" type="number" value = "0" max="10" min = "0"></div>
+                                            <br>{{ flight.flightPrices[0].baggageD || '0'}} {{currency}}/ea.
+                                        </div>
+                                         <div class="col-md-1">
+                                            <br>
+                                            <div>E</div>
+                                            <div><input id="spinE" ng-model="ticket.baggages[4]"  ng-change="getTotalPrice()" type="number" value = "0" max="10" min = "0"></div>
+                                            <br>{{ flight.flightPrices[0].baggageE || '0'}} {{currency}}/ea.
+                                        </div>
+                                         <div class="col-md-1">
+                                            <br>
+                                            <div>Sport</div>
+                                            <div><input id="spinS" ng-model="ticket.baggages[5]"  ng-change="getTotalPrice()" type="number" value = "0" max="10" min = "0"></div>
+                                            <br>{{ flight.flightPrices[0].baggageSport || '0'}} {{currency}}/ea.
+                                        </div>
+                                         <div class="col-md-1">
+                                            <br>
+                                            <div>Music</div>
+                                            <div><input id="spinM" ng-model="ticket.baggages[6]"  ng-change="getTotalPrice()" type="number" value = "0" max="10" min = "0"></div>
+                                            <br>{{ flight.flightPrices[0].baggageMusical || '0'}} {{currency}}/ea.
+                                        </div>
                                     </div>
                                 </div>
 
@@ -181,6 +251,11 @@
                                     <div>
                                         Airport tax fee: ({{ flight.flightPrices[0].airportTaxFee || '0'}} {{currency}})
                                     </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="formImput8">Total price: {{ ticketCost}} {{currency}}</label>
+                                    
                                 </div>
 
                                 <button type="submit" class="btn btn-default" ng-click="$parent.$parent.accordianOpen1 = !$parent.$parent.accordianOpen1"><i class="glyphicon glyphicon-chevron-left"></i> Previous</button>

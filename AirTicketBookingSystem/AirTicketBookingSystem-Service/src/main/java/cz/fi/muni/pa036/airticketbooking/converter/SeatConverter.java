@@ -18,6 +18,7 @@ public class SeatConverter {
     public static Seat seatDtoToEntity(SeatDto seat) {
         Seat s = new Seat();
         s.setId(seat.getId());
+        s.setNumeric(seat.getNumber().intValue());
         s.setBusinessClass(seat.getBusinessClass());
         s.setDisabledSeating(seat.getDisabledSeating());
         s.setEconomyClass(seat.getEconomyClass());
@@ -33,6 +34,7 @@ public class SeatConverter {
     public static SeatDto seatEntityToDto(Seat seat) {
         SeatDto s = new SeatDto();
         s.setId(seat.getId());
+        s.setNumber(seat.getNumeric().longValue());
         s.setBusinessClass(seat.getBusinessClass());
         s.setDisabledSeating(seat.getDisabledSeating());
         s.setEconomyClass(seat.getEconomyClass());

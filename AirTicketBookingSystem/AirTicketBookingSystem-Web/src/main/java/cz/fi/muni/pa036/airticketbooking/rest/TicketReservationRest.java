@@ -4,9 +4,12 @@ import cz.fi.muni.pa036.airticketbooking.api.dto.FlightDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightPriceDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightTicketDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightTicketWithPriceDto;
+import cz.fi.muni.pa036.airticketbooking.api.dto.SeatDto;
 import cz.fi.muni.pa036.airticketbooking.api.service.FlightService;
+import cz.fi.muni.pa036.airticketbooking.api.service.SeatService;
 import cz.fi.muni.pa036.airticketbooking.api.service.SecurityService;
 import cz.fi.muni.pa036.airticketbooking.api.service.TicketReservationService;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.validation.Valid;
@@ -31,6 +34,9 @@ public class TicketReservationRest {
 
     @Autowired
     SecurityService securityService;
+    
+    @Autowired
+    SeatService seatService;
 
     @Autowired
     TicketReservationService reservationService;
@@ -45,6 +51,15 @@ public class TicketReservationRest {
     @RequestMapping(value = "/empty", method = RequestMethod.GET)
     public FlightTicketWithPriceDto getEmptyReservationDto() {
         return new FlightTicketWithPriceDto();
+    }
+    
+     @RequestMapping(value = "/getSeats", method = RequestMethod.GET)
+    public List<SeatDto> getSeatList() {
+        List<SeatDto> flightList = seatService.getAll();
+        if (flightList == null) {
+            flightList = new ArrayList<>();
+        }
+        return eliminateInfiniteRecursive(flightList);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -82,5 +97,24 @@ public class TicketReservationRest {
         flight.getPlane().setSeats(null);
 
         return flight;
+    }
+    
+    
+    private List<SeatDto> eliminateInfiniteRecursive(List<SeatDto> seatList) {
+        for (SeatDto seat : seatList) {
+            eliminateInfiniteRecursive(seat);
+        }
+        return seatList;
+    }
+
+    /**
+     * Eliminate infinite recurcive Seat->Airport_set->Seat, which can't be
+     * converted to json
+     */
+    private SeatDto eliminateInfiniteRecursive(SeatDto seat) {
+        seat.getAirplane().set(null);
+        seat.getAirplane().setFlights(null);
+        seat.getAirplane().setSeats(null);
+        return seat;
     }
 }

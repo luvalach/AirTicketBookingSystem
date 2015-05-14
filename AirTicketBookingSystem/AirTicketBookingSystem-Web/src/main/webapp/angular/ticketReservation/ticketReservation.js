@@ -18,11 +18,45 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
         $scope.editMode = false;
         $scope.currency = "$";
         $scope.saveButtonText = "Save as new reservation";
+        
+         $scope.countSeats = function () {
+            var a = 0; var b = 0; var c = 0; var d = 0;
+                    for (var i = 0; i < $scope.seats.length; i++) {
+                        if ($scope.seats[i].airplane.id === $scope.flight.plane.id) {
+                            if (($scope.seats[i].firstClass === "1" && $scope.ticket.ticketClass === "first" ) || 
+                                ($scope.seats[i].secondClass === "1" && $scope.ticket.ticketClass === "second" ) || 
+                                ($scope.seats[i].businessClass === "1" && $scope.ticket.ticketClass === "business" ) || 
+                                ($scope.seats[i].economyClass === "1" && $scope.ticket.ticketClass === "economy" )) {
+                                if ($scope.seats[i].nextToWindow === "1") a++;
+                                if ($scope.seats[i].nextToAisle === "1") b++;
+                                if ($scope.seats[i].inTheMiddle === "1") c++;
+                                if ($scope.seats[i].disabledSeating === "1") d++;
+                            }
+                        }                        
+                    }
+                    $scope.seatCount = [4];
+                    $scope.seatCount[0] = a;
+                    $scope.seatCount[1] = b;
+                    $scope.seatCount[2] = c;
+                    $scope.seatCount[3] = d;
+        };
+        
+        $scope.seats = TicketReservationService($routeParams.flightId).getSats(
+                function (data, status, headers, config) {
+                    $log.info("Seats loaded.");
+                    $scope.seats = data;
+                    $scope.seat = "nextToWindow";
+                    
+                },
+                function (data, status, headers, config) {
+                    $log.error("An error occurred on server! Seats cannot be loaded.");
+                });
 
         $scope.flight = TicketReservationService($routeParams.flightId).getFlightDetail(
                 function (data, status, headers, config) {
                     $log.info("Flight(id=" + $routeParams.flightId + ") detail loaded.");
                     $scope.flight = data;
+                    $scope.countSeats();
                 },
                 function (data, status, headers, config) {
                     $log.error("An error occurred on server! Detail of flight(id=" + $routeParams.flightId + ") cannot be loaded.");
@@ -85,6 +119,30 @@ ticketReservationControllers.controller('TicketReservationCtrl', ['$scope', '$wi
             $scope.setFlightIntoTicket();
             $scope.validateAndSaveTicket();
         };
+        
+        $scope.getTotalPrice = function() {
+            var cost = 0;
+            if ($scope.ticket.age === "adult") cost += $scope.flight.flightPrices[0].adult;
+            if ($scope.ticket.age === "teen") cost += $scope.flight.flightPrices[0].teen;
+            if ($scope.ticket.age === "child") cost += $scope.flight.flightPrices[0].child;
+            if ($scope.ticket.baggages[0] > 0) cost += ($scope.flight.flightPrices[0].baggageA * $scope.ticket.baggages[0]);
+            if ($scope.ticket.baggages[1] > 0) cost += ($scope.flight.flightPrices[0].baggageB * $scope.ticket.baggages[1]); 
+            if ($scope.ticket.baggages[2] > 0) cost += ($scope.flight.flightPrices[0].baggageC * $scope.ticket.baggages[2]); 
+            if ($scope.ticket.baggages[3] > 0) cost += ($scope.flight.flightPrices[0].baggageD * $scope.ticket.baggages[3]); 
+            if ($scope.ticket.baggages[4] > 0) cost += ($scope.flight.flightPrices[0].baggageE * $scope.ticket.baggages[4]); 
+            if ($scope.ticket.baggages[5] > 0) cost += ($scope.flight.flightPrices[0].baggageSport * $scope.ticket.baggages[5]); 
+            if ($scope.ticket.baggages[6] > 0) cost += ($scope.flight.flightPrices[0].baggageMusical * $scope.ticket.baggages[6]); 
+            if ($scope.ticket.ticketClass === "first") cost += $scope.flight.flightPrices[0].firstClass;
+            if ($scope.ticket.ticketClass === "second") cost += $scope.flight.flightPrices[0].secondClass;    
+            if ($scope.ticket.ticketClass === "business") cost += $scope.flight.flightPrices[0].businessClass;    
+            if ($scope.ticket.ticketClass === "economy") cost += $scope.flight.flightPrices[0].economyClass;
+            cost += $scope.flight.flightPrices[0].paymentFee;
+            cost += $scope.flight.flightPrices[0].airportTaxFee;
+            if ($scope.ticket.smsFlightInfo) cost += $scope.flight.flightPrices[0].smsFlightInfo;
+            if ($scope.ticket.offlineCheckIn) cost += $scope.flight.flightPrices[0].offlineCheckIn;
+            $scope.ticketCost = cost;
+        }
+
 
         //Open saved ticket for editing
         $scope.editTicket = function (ticket) {
@@ -201,7 +259,8 @@ ticketReservationServices.factory('TicketReservationService', ['$resource', func
                 create: {method: 'POST', isArray: true},
                 update: {method: 'PUT', isArray: false},
                 delete: {method: 'DELETE', isArray: false},
-                validateTicket: {method: 'POST', isArray: false, url: "rest/ticketReservation/validateTicket"}
+                validateTicket: {method: 'POST', isArray: false, url: "rest/ticketReservation/validateTicket"},
+                getSats: {method: 'GET', isArray: true, url: "rest/ticketReservation/getSeats"}
             });
         };
     }]);

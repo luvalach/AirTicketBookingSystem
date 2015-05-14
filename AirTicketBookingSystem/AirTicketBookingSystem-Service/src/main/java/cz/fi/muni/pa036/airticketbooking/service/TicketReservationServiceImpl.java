@@ -5,6 +5,7 @@
  */
 package cz.fi.muni.pa036.airticketbooking.service;
 
+import cz.fi.muni.pa036.airticketbooking.api.dto.BaggageDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightPriceDto;
 import cz.fi.muni.pa036.airticketbooking.api.dto.FlightTicketDto;
@@ -14,8 +15,14 @@ import cz.fi.muni.pa036.airticketbooking.api.dto.SeatReservationDto;
 import cz.fi.muni.pa036.airticketbooking.api.service.FlightService;
 import cz.fi.muni.pa036.airticketbooking.api.service.TicketReservationService;
 import cz.fi.muni.pa036.airticketbooking.converter.FlightTicketConverter;
+import cz.fi.muni.pa036.airticketbooking.dao.BaggageDao;
 import cz.fi.muni.pa036.airticketbooking.dao.FlightTicketDao;
 import cz.fi.muni.pa036.airticketbooking.dao.FlightTicketPriceDao;
+import cz.fi.muni.pa036.airticketbooking.dao.SeatDao;
+import cz.fi.muni.pa036.airticketbooking.dao.SeatReservationDao;
+import cz.fi.muni.pa036.airticketbooking.entity.Baggage;
+import cz.fi.muni.pa036.airticketbooking.entity.Seat;
+import cz.fi.muni.pa036.airticketbooking.entity.SeatReservation;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,6 +45,15 @@ public class TicketReservationServiceImpl implements TicketReservationService {
 
     @Autowired
     FlightTicketDao flightTicketDao;
+    
+    @Autowired
+    BaggageDao baggageDao;
+    
+    @Autowired
+    SeatReservationDao seatResDao;
+    
+    @Autowired
+    SeatDao seatDao;
     
     @Autowired
     FlightTicketPriceDao flightTicketPriceDao;
@@ -139,6 +155,67 @@ public class TicketReservationServiceImpl implements TicketReservationService {
         flightTicketPrice.setPaymentFee(flightPrices.getPaymentFee() == null ? new BigDecimal(0) : flightPrices.getPaymentFee());
         flightTicketPrice.setFlightTicket(flightTicket);
         flightTicketDao.create(FlightTicketConverter.flightTicketDtoToEntity(flightTicket));
+        
+        /*
+        List<Seat> seatList = seatDao.getByPlane(flightTicketWithPriceDto.getFlight().getPlane().getId());
+        Long seatNum = (long) 0;
+        for (int i = 0; i < seatList.size(); i++) {
+            if (flightTicketWithPriceDto.getSeat().equals("nextToWindow") && seatList.get(i).getNextToWindow().equals('1')) {
+                if (flightTicketWithPriceDto.getTicketClass().equals("first") && seatList.get(i).getFirstClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                 if (flightTicketWithPriceDto.getTicketClass().equals("second") && seatList.get(i).getSecondClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                  if (flightTicketWithPriceDto.getTicketClass().equals("business") && seatList.get(i).getBusinessClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                   if (flightTicketWithPriceDto.getTicketClass().equals("economy") && seatList.get(i).getEconomyClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+            }
+             if (flightTicketWithPriceDto.getSeat().equals("inTheMiddle") && seatList.get(i).getInTheMiddle().equals('1')) {
+                if (flightTicketWithPriceDto.getTicketClass().equals("first") && seatList.get(i).getFirstClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                 if (flightTicketWithPriceDto.getTicketClass().equals("second") && seatList.get(i).getSecondClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                  if (flightTicketWithPriceDto.getTicketClass().equals("business") && seatList.get(i).getBusinessClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                   if (flightTicketWithPriceDto.getTicketClass().equals("economy") && seatList.get(i).getEconomyClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+            }
+              if (flightTicketWithPriceDto.getSeat().equals("nextToAisle") && seatList.get(i).getNextToAisle().equals('1')) {
+                if (flightTicketWithPriceDto.getTicketClass().equals("first") && seatList.get(i).getFirstClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                 if (flightTicketWithPriceDto.getTicketClass().equals("second") && seatList.get(i).getSecondClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                  if (flightTicketWithPriceDto.getTicketClass().equals("business") && seatList.get(i).getBusinessClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                   if (flightTicketWithPriceDto.getTicketClass().equals("economy") && seatList.get(i).getEconomyClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+            }
+               if (flightTicketWithPriceDto.getSeat().equals("disabledSeating") && seatList.get(i).getDisabledSeating().equals('1')) {
+                if (flightTicketWithPriceDto.getTicketClass().equals("first") && seatList.get(i).getFirstClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                 if (flightTicketWithPriceDto.getTicketClass().equals("second") && seatList.get(i).getSecondClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                  if (flightTicketWithPriceDto.getTicketClass().equals("business") && seatList.get(i).getBusinessClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+                   if (flightTicketWithPriceDto.getTicketClass().equals("economy") && seatList.get(i).getEconomyClass().equals('1')) { seatNum = seatList.get(i).getId();
+                }
+            }
+        }
+        SeatReservation sr = new SeatReservation();
+        sr.setFlightTicket(FlightTicketConverter.flightTicketDtoToEntity(flightTicket));
+        sr.setSeat(seatDao.getById(seatNum));       
+        seatResDao.create(sr);*/
+        
+        for (BaggageDto b : flightTicketWithPriceDto.getBaggages()) {
+            if (b.getAmount() > 0) {
+                Baggage bag = new Baggage();
+                bag.setAmount(b.getAmount());
+                bag.setFlightTicket(FlightTicketConverter.flightTicketDtoToEntity(flightTicket));
+                bag.setType(b.getType());
+                baggageDao.create(bag);
+            }
+        }
+        
                 
         return flightTicket.getId();
     }
