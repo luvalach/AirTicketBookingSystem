@@ -18,7 +18,14 @@ searchControllers.controller('SearchCtrl', ['$scope', '$routeParams', '$window',
         $scope.reverseSort = false;
         //Array of locations will be stored here
         $scope.flights = {};
-
+        
+        $scope.searchQuery = {
+            "adults": $routeParams.adults == 'undefined' ? 0 : $routeParams.adults,
+            "teens": $routeParams.teens == 'undefined' ? 0 : $routeParams.teens,
+            "children": $routeParams.children == 'undefined' ? 0 : $routeParams.children,
+            "typePrice": 0,
+            "type": $routeParams.type == 'undefined' ? 0 : $routeParams.type
+        }
 
 //        $scope.refreshflights = function () {
 //            SearchService("").query(
@@ -36,7 +43,7 @@ searchControllers.controller('SearchCtrl', ['$scope', '$routeParams', '$window',
             SearchService("").search({from: $routeParams.from, to: $routeParams.to, departure: $routeParams.departure},
             function (data, status, headers, config) {
                 $scope.flights = data;
-                $log.info("List of flights loaded." + $scope.flights.code);
+                
             },
                     function (data, status, headers, config) {
                         $log.info("An error occurred on server! List of flights cannot be loaded." + data + status + headers + config);
@@ -78,11 +85,10 @@ searchControllers.controller('SearchCtrl', ['$scope', '$routeParams', '$window',
         $scope.goToHomePage = function () {
             $window.location.href = '/AirTicketBooking/';
         };
-
-        //$log.info("from: " + $scope.airportByAirportFromId.name);
-        $log.info("from: " + $routeParams.from);
-        $log.info("to: " + $routeParams.to);
-        $log.info("departure: " + $routeParams.departure);
+        
+        $scope.buyTicket = function (flightId) {
+            $window.location.href = '/AirTicketBooking/#/ticketReservation/' + flightId;
+        };
 
     }]);
 

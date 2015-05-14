@@ -5,13 +5,16 @@ mainControllers.controller('MainCtrl', ['$scope', '$window', '$rootScope', '$log
     $scope.airports = AirportService("").query();
         
     // zobrazenie výsledkov
-    $scope.search = function (from, to, departure) {
+    $scope.search = function (from, to, departure, adults, teens, children, type) {
         from = $scope.search.airportByAirportFromId.id;
         to = $scope.search.airportByAirportToId.id;
         departure = $scope.search.departure;
         departure = $filter('date')(departure, "yyyy-MM-dd");
-        $window.location.href = '/AirTicketBooking/#/searchResults/' + from + '/' + to + '/' + departure;
-//        $window.location.href = '/AirTicketBooking/#/searchResults/';
+        adults = $scope.search.adultCount;
+        teens = $scope.search.teenCount;
+        children = $scope.search.childCount;
+        type = $scope.search.type;
+        $window.location.href = '/AirTicketBooking/#/searchResults/' + from + '/' + to + '/' + departure + '/' + adults + '/' + teens + '/' + children + '/' + type;
     };
 
 }]);

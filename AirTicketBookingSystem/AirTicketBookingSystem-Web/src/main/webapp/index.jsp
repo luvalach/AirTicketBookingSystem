@@ -58,12 +58,6 @@
                             <a href="/AirTicketBooking/#/homepage">Find a flight</a>
                         </li>
                         <li>
-                            <a href="/AirTicketBooking/#/my-bookings">My Bookings</a>
-                        </li>
-                        <li>
-                            <a href="/AirTicketBooking/#/check-in">Check-in</a>
-                        </li>
-                        <li>
                             <a href="/AirTicketBooking/#/city">Cities</a>
                         </li>
                         <li>

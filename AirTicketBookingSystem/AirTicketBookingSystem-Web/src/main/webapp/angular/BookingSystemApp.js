@@ -35,7 +35,7 @@ app.config(['$routeProvider',
                     templateUrl: 'angular/homepage/homepage.html',
                     controller: 'MainCtrl'
                 }).
-                when('/searchResults/:from/:to/:departure', {
+                when('/searchResults/:from/:to/:departure/:adults/:teens/:children/:type', {
                     templateUrl: 'angular/homepage/searchResults.html',
                     controller: 'SearchCtrl'
                 })./*

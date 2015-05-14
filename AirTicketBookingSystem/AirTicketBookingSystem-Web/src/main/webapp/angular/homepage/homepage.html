@@ -33,7 +33,7 @@
                             </p>
                         </td>
 
-                        <td colspan="2">
+                        <td colspan="2"><!--
                             <div ng-controller="Datepicker">
                                 <p class="input-group"> 
                                     <input ng-model="search.return" type="text" id="departureReturnDate" placeholder="Return date" class="form-control" datepicker-popup="d.M.yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true">
@@ -41,20 +41,20 @@
                                         <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
                                 </p>
-                            </div>
+                            </div>-->
                         </td>
 
                         <td colspan="2">
-                            <div>
-                                <input type="checkbox" id="returnCheckbox">
-                                <label for="returnCheckbox">Return ticket</label>
-                            </div>
+                            <select ng-model="search.type" class="form-control">
+                                <option value="0" selected>Economy 2nd class</option>
+                                <option value="1">Economy 1st class</option>
+                                <option value="2">Business</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 10%;">
-                                <select id="adultCount" class="form-control">
-                                    <option value="0" selected>0</option>
+                                <select ng-model="search.adultCount" class="form-control">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -67,8 +67,7 @@
                         </td>
 
                         <td style="width: 10%;">
-                                <select id="teenCount" class="form-control">
-                                    <option value="0" selected>0</option>
+                                <select ng-model="search.teenCount" class="form-control">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -81,8 +80,7 @@
                         </td>
 
                         <td style="width: 10%;">
-                                <select id="childCount" class="form-control">
-                                    <option value="0" selected>0</option>
+                                <select ng-model="search.childCount" class="form-control">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -95,12 +93,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
-                            <select id="childCount" class="form-control">
-                                <option value="economy2nd" selected>Economy 2nd class</option>
-                                <option value="economy1st">Economy 1st class</option>
-                                <option value="business">Business</option>
-                            </select>
+                        <td colspan="3"><!--
+                            <div>
+                                <input type="checkbox" id="returnCheckbox">
+                                <label for="returnCheckbox">Return ticket</label>
+                            </div>-->
                         </td>
                         
                         <td colspan="3">
@@ -117,12 +114,7 @@
     <div class="row">
         <div class="box">
             <div class="col-lg-12">
-                <hr>
-                <h2 class="intro-text text-center">
-                    <strong>Project description</strong>
-                </h2> 
-                <hr>
-                Project description...
+                <br><br><br><hr>
             </div>
         </div>
     </div>
