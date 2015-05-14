@@ -29,6 +29,7 @@
         <script src="angular/flight/flightCtrl.js"></script>
         <script src="angular/flightPrice/flightPriceCtrl.js"></script>
         <script src="angular/ticketReservation/ticketReservation.js"></script>
+        <script src="angular/ticketManagement/ticketCtrl.js"></script>
         <!--Set angular startup arguments -->
         <!--<script>
             app.value("userId", "${userId}").value("isAdmin", "<sec:authorize access="hasRole('ROLE_ADMIN')">true</sec:authorize>").value("userName", "${userName}");
@@ -78,7 +79,10 @@
                             <a href="/AirTicketBooking/#/flightPrice">Flight Prices</a>
                         </li>
                         <li>
-                            <a href="/AirTicketBooking/#/ticketReservation/1">Ticket Reservation</a>
+                            <a href="/AirTicketBooking/#/ticketReservation">Ticket Reservation</a>
+                        </li>
+                        <li>
+                            <a href="/AirTicketBooking/#/ticket">Ticket Management</a>
                         </li>
                     </ul>
                 </div>

@@ -19,6 +19,8 @@ var app = angular.module('airTicketBookingApp', [
     'flightPriceServices',
     'ticketReservationControllers',
     'ticketReservationServices',
+    'ticketControllers',
+    'ticketServices',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker'
 ]);
@@ -104,6 +106,14 @@ app.config(['$routeProvider',
                 when('/ticketReservation/:flightId', {
                     templateUrl: 'angular/ticketReservation/ticketReservation.html',
                     controller: 'TicketReservationCtrl'
+                }).
+                when('/ticket/', {
+                    templateUrl: 'angular/ticketManagement/ticketList.html',
+                    controller: 'TicketListCtrl'
+                }).
+                when('/ticket/:ticketId', {
+                    templateUrl: 'angular/ticketManagement/ticketDetail.html',
+                    controller: 'TicketDetailCtrl'
                 }).
                 otherwise({
                     redirectTo: '/homepage'
